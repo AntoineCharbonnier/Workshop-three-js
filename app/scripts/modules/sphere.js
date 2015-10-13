@@ -28,6 +28,7 @@ class Sphere {
       } 
     );
 
+    // wireframe
     this.meshMaterial2 = new THREE.ShaderMaterial( {
       uniforms: { 
           time: { type: "f", value: 0 },
@@ -76,7 +77,7 @@ class Sphere {
     
     this.speed           = .0003;
     this.weight          = 5;
-    this.opacity         = 1.0;
+    this.opacity         = 0.0;
 
     // this.update();
     // console.log("nb vertices : ", this.mesh.geometry.attributes.position.array.length / 3)
@@ -98,25 +99,24 @@ class Sphere {
 
       if(data && data != "undefined"){
         if(data.freq[200] > 100 ){
-
-      //     this.mesh.material.wireframe          = true;
-      //     this.mesh.material.needUpdate         = true;
-      //     this.mesh.geometry.verticesNeedUpdate = true;
-      //   }
-      //   else{
-      //     this.mesh.material.wireframe          = false;
-      //     this.mesh.material.needUpdate         = true;
-      //     this.mesh.geometry.verticesNeedUpdate = true;          
-          this.meshMaterial.uniforms[ 'opacity' ].value  = 0;
-          this.meshMaterial2.uniforms[ 'opacity' ].value = 1;
-
+          // mesh 1 lower & mesh 2 greater
+          if(this.opacity < 1){
+            this.opacity += 0.01;
+          }
         }
         else{
-          this.meshMaterial.uniforms[ 'opacity' ].value  = 1;
-          this.meshMaterial2.uniforms[ 'opacity' ].value = 0;
+          // mesh 1 greater & mesh 2 lower
+          if(this.opacity > 0){
+            this.opacity -= 0.01;
+          }
         }
+        this.meshMaterial.uniforms[ 'opacity' ].value  = this.opacity;
+        this.meshMaterial2.uniforms[ 'opacity' ].value = this.opacity;
       }
+
+    // this.meshMaterial2.uniforms[ 'opacity' ].value = 0.5;
     // }
+    // console.log(this.opacity)
 
     // this.meshMaterial.uniforms[ 'opacity' ].value  = 0;
     // this.meshMaterial2.uniforms[ 'opacity' ].value = 0;
