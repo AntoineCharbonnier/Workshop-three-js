@@ -163,21 +163,21 @@ float pnoise(vec3 P, vec3 rep)
   return 2.2 * n_xyz;
 }
 
-float stripes( float x, float f) {
-  float PI = 3.14159265358979323846264;
-  float t = .5 + .5 * sin( f * 2.0 * PI * x);
-  return t * t - .5;
-}
+// float stripes( float x, float f) {
+//   float PI = 3.14159265358979323846264;
+//   float t = .5 + .5 * sin( f * 2.0 * PI * x);
+//   return t * t - .5;
+// }
 
-float turbulence( vec3 p ) {
-  float w = 100.0;
-  float t = -.5;
-  for (float f = 1.0 ; f <= 10.0 ; f++ ){
-    float power = pow( 2.0, f );
-    t += abs( pnoise( vec3( power * p ), vec3( 10.0, 10.0, 10.0 ) ) / power );
-  }
-  return t;
-}
+// float turbulence( vec3 p ) {
+//   float w = 100.0;
+//   float t = -.5;
+//   for (float f = 1.0 ; f <= 10.0 ; f++ ){
+//     float power = pow( 2.0, f );
+//     t += abs( pnoise( vec3( power * p ), vec3( 10.0, 10.0, 10.0 ) ) / power );
+//   }
+//   return t;
+// }
 
 float f( vec3 p ) {
   return pnoise( vec3( p ), vec3( 10.0, 10.0, 10.0 ) );

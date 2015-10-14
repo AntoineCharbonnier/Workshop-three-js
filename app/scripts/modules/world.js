@@ -53,7 +53,8 @@ class World {
   	    this.clock = null;
 
         this.sound = new Sound();
-        this.sound.load( "mp3/InDaClub-50Cent.mp3" )
+        // this.sound.load( "mp3/InDaClub-50Cent.mp3" )
+        this.sound.load( "mp3/odesza-say-my-name.mp3" )
         this.tmpData = this.sound.getData();
 
     }
@@ -167,10 +168,10 @@ class World {
           this.render( ts );
           this.tmpData = this.sound.getData();
           this.sphere.update(ts , this.tmpData);
-          this.terrain.update();
+          this.terrain.update(ts , this.tmpData);
           this.particles.update();
 
-
+          this.glitch.update(ts, this.tmpData)
           // this.glitch.render();
       }
     }
@@ -185,8 +186,8 @@ class World {
     	window.addEventListener( 'resize', this.onWindowResize.bind( this ), false );
     	this.keyboard = new Keyboard();	
       this.keyboard.addObject( this.sphere.getMesh() );
-      // this.keyboard.addObject( this.particles.getMesh() );
-      // this.keyboard.addObject( this.terrain.getMesh() );
+      this.keyboard.addObject( this.particles.getMesh() );
+      this.keyboard.addObject( this.terrain.getMesh() );
     }
 
     onWindowResize() {

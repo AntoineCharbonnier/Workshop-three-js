@@ -6,6 +6,9 @@ varying float ao;
 uniform float time;
 uniform float size;
 uniform float opacity;
+uniform float redValue;
+uniform float greenValue;
+uniform float blueValue;
 vec3 vColor;
 
 float rand(vec2 co){
@@ -16,9 +19,9 @@ void main() {
 
     vec2 position = -1.0 + 2.0 * vUv;
     
-    float red = abs(sin(position.x * position.y + clamp( time / 5.0, 191.0 / 255.0, 38.0 / 255.0 )));
-    float green = abs(sin(position.x * position.y + clamp( time / 4.0, 209.0 / 255.0, 118.0 / 255.0 )));
-    float blue = abs(sin(position.x * position.y + clamp( time / 3.0, 228.0 / 255.0, 173.0 / 255.0 ) ));
+    float red    = redValue + abs(sin(position.x * position.y + clamp( time / 5.0, 191.0 / 255.0, 38.0 / 255.0 )));
+    float green  = greenValue + abs(sin(position.x * position.y + clamp( time / 4.0, 209.0 / 255.0, 118.0 / 255.0 )));
+    float blue   = blueValue + abs(sin(position.x * position.y + clamp( time / 3.0, 228.0 / 255.0, 173.0 / 255.0 ) ));
     gl_FragColor = vec4(red, green, blue, opacity);
 
     // float green = 192.0 / 255.0;

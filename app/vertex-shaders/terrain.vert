@@ -193,6 +193,11 @@ void main()
     // First perlin passes
 
     float displacement  = pnoise( .4 * position + vec3( 0, speed * time, 0 ), vec3( 100.0 ) ) * 1. * noise_range;
+    
+    // if (distance(position,vec3(0,0,-500)) > 100){
+    //   displacement += 1.1;
+    // }
+
 
     if( perlin_passes > 2.0 ){
 
