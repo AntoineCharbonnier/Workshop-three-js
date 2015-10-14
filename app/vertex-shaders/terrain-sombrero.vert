@@ -186,25 +186,25 @@ varying float z;
 void main()
 {
     gl_PointSize = 1.;
-    v_uv          = uv;
-    v_line_color   = line_color;
+    v_uv         = uv;
+    v_line_color = line_color;
 
     // First perlin passes
 
-    float displacement  = pnoise( .4 * position + vec3( 0, speed * time, 0 ), vec3( 100.0 ) ) * 1. * noise_range;
-    float distance = sqrt(((uv.x-0.5) * (uv.x-0.5)) + ((uv.y-0.5) * (uv.y-0.5)));
+    float displacement = pnoise( .4 * position + vec3( 0, speed * time, 0 ), vec3( 100.0 ) ) * 1. * noise_range;
+    float distance     = sqrt(((uv.x-0.5) * (uv.x-0.5)) + ((uv.y-0.5) * (uv.y-0.5)));
 
     if( perlin_passes > 2.0 ){
       if(abs(distance) < 0.3){
-
-        displacement       += pnoise( 2. * position + vec3( 0, speed * time * 5., 0 ), vec3( 100. ) ) * .3 * noise_range;
-        displacement       += pnoise( 8. * position + vec3( 0, speed * time * 20., 0 ), vec3( 100. ) ) * .1 * noise_range;
+        
+        displacement += pnoise( 2. * position + vec3( 0, speed * time * 5., 0 ), vec3( 100. ) ) * .3 * noise_range;
+        displacement += pnoise( 8. * position + vec3( 0, speed * time * 20., 0 ), vec3( 100. ) ) * .1 * noise_range;
       }
 
     }
     else if(perlin_passes > 1.0){
 
-      displacement       += pnoise( 8. * position + vec3( 0, speed * time * 20., 0 ), vec3( 100. ) ) * .1 * noise_range;
+      displacement  += pnoise( 8. * position + vec3( 0, speed * time * 20., 0 ), vec3( 100. ) ) * .1 * noise_range;
     }
 
 
@@ -215,10 +215,10 @@ void main()
 
 
     // Sinus
-    displacement = displacement + (sin(position.x / 2. - M_PI / 2.)) * elevation;
-
+    displacement     = displacement + (sin(position.x / 2. - M_PI / 2.)) * elevation;
+    
     vec3 newPosition = vec3(position.x,position.y,displacement + z);
     gl_Position      = projectionMatrix * modelViewMatrix * vec4( newPosition, 1. );
-
-    z = newPosition.z;
+    
+    z                = newPosition.z;
 }

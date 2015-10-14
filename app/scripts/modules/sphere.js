@@ -76,8 +76,10 @@ class Sphere {
     this.redValue        = 0;
     this.greenValue      = 0;
     this.blueValue       = 0;
-
-    this.step = 0.001
+    
+    this.stepRed         = 0.001
+    this.stepGreen       = 0.01
+    this.stepBlue        = 0.005
 
     return this;
   }
@@ -115,31 +117,34 @@ class Sphere {
       }
 
       //  voice ? with color
-      console.log( this.averageData("fred" , data, 80, 170) )
+      // console.log( this.averageData("fred" , data, 80, 170) )
       if(this.averageData("fred" , data, 0, 80) > 100){
-        this.redValue   += this.step 
+        this.redValue   += this.stepRed
       }
       else{
-        this.redValue   -= this.step
+        this.redValue   -= this.stepRed
       }
       if(this.averageData("fred" , data, 80, 160) > 100){
-        this.greenValue += this.step 
+        this.greenValue += this.stepGreen
       }
       else{
-        this.greenValue -= this.step
+        this.greenValue -= this.stepGreen
       }
       if(this.averageData("fred" , data, 160, 255) > 100){
-        this.blueValue  += this.step 
+        this.blueValue  += this.stepBlue
       }
       else{
-        this.blueValue  -= this.step
+        this.blueValue  -= this.stepBlue
       }
 
-      console.log(this.redValue,this.greenValue,this.blueValue)
+      // console.log(this.redValue,this.greenValue,this.blueValue)
 
-      // if(this.redValue >= 1 || this.greenValue >= 1 || this.blueValue >= 1 ){
-      //   // this.blueValue = this.greenValue = this.redValue = 
-      // }
+      if((this.redValue >= 1 || this.greenValue >= 1 || this.blueValue >= 1) || (this.redValue <= 0.2 || this.greenValue <= 0.2 || this.blueValue <= 0.2) ){
+        // this.blueValue = this.greenValue = this.redValue = 0
+        this.stepRed   = (this.stepRed) * -1
+        this.stepGreen = (this.stepGreen) * -1
+        this.stepBlue  = (this.stepBlue) * -1
+      }
 
       this.meshMaterial.uniforms[ 'opacity' ].value  = this.opacity;
       this.meshMaterial2.uniforms[ 'opacity' ].value = this.opacity;
@@ -152,15 +157,19 @@ class Sphere {
     // this.meshMaterial.uniforms[ 'opacity' ].value  = 0;
     // this.meshMaterial2.uniforms[ 'opacity' ].value = 0;
 
-    this.meshMaterial.uniforms[ 'time' ].value   = this.speed * ( Date.now() - this.clock );
-    this.meshMaterial.uniforms[ 'weight' ].value = this.weight;
-
-    this.meshMaterial2.uniforms[ 'time' ].value   = this.speed * ( Date.now() - this.clock );
-    this.meshMaterial2.uniforms[ 'weight' ].value = this.weight;
+    this.meshMaterial.uniforms[ 'time' ].value        = this.speed * ( Date.now() - this.clock );
+    this.meshMaterial.uniforms[ 'weight' ].value      = this.weight;
     
-    this.meshMaterial2.uniforms[ 'redValue' ].value = this.redValue;
+    this.meshMaterial2.uniforms[ 'time' ].value       = this.speed * ( Date.now() - this.clock );
+    this.meshMaterial2.uniforms[ 'weight' ].value     = this.weight;
+    
+    this.meshMaterial2.uniforms[ 'redValue' ].value   = this.redValue;
     this.meshMaterial2.uniforms[ 'greenValue' ].value = this.greenValue;
-    this.meshMaterial2.uniforms[ 'blueValue' ].value = this.blueValue;
+    this.meshMaterial2.uniforms[ 'blueValue' ].value  = this.blueValue;
+
+    // this.meshMaterial.uniforms[ 'redValue' ].value   = this.redValue;
+    // this.meshMaterial.uniforms[ 'greenValue' ].value = this.greenValue;
+    // this.meshMaterial.uniforms[ 'blueValue' ].value  = this.blueValue;
 
   }
 

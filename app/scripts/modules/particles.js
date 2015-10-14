@@ -76,6 +76,7 @@ class Particles {
     this.drop    = true
     this.blocker = true
     this.opacity = 1.0;
+    this.launchedSound = true;
 
     this.particleSystem.name = "particleSystem"
 
@@ -83,7 +84,10 @@ class Particles {
       function(){
         this.drop = false;
         console.log("click")
-        this.sound.start()
+        if(this.launchedSound){
+          this.launchedSound = false
+          this.sound.start()
+        }
       }.bind(this)
     );
 
@@ -91,7 +95,6 @@ class Particles {
   }
 
   update() {
-    // window.requestAnimationFrame( this.update.bind(this) );
     var time = Date.now() * 0.01;
 
     if(this.drop){
@@ -108,24 +111,24 @@ class Particles {
         positions[ i ] += (5 * ( 1 + (Math.sin(  i + time )) )) * 0.004 ;
       }
 
-      if(this.opacity > 0){
+      if(this.opacity > 0.3){
         this.opacity -= 0.001
       }
 
       this.geometry2.attributes.position.needsUpdate = true;
       this.shaderMaterial2.uniforms[ 'alpha' ].value = this.opacity;
       // this.shaderMaterial2.needsUpdate = true
-      if(this.opacity < 0.002 && this.blocker){
-        this.blocker = false
-        setTimeout(
-          function(){ 
-            // console.log(this.scene)
-            this.scene.remove(this.particleSystem)
-            // console.log(this.scene)
-          }.bind(this), 
-          1000
-        );
-      }
+      // if(this.opacity < 0.002 && this.blocker){
+      //   this.blocker = false
+      //   setTimeout(
+      //     function(){ 
+      //       // console.log(this.scene)
+      //       this.scene.remove(this.particleSystem)
+      //       // console.log(this.scene)
+      //     }.bind(this), 
+      //     1000
+      //   );
+      // }
     }
   }
 
