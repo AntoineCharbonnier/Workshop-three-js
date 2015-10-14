@@ -19,7 +19,7 @@ class Glitch {
 
 
   update( ts ) {
-    window.requestAnimationFrame( this.update.bind(this) );
+    // window.requestAnimationFrame( this.update.bind(this) );
   }
 
   render(){

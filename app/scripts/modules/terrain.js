@@ -117,7 +117,7 @@ class Terrain {
 
 
   update( ts, noise_range) {
-    window.requestAnimationFrame( this.update.bind(this) );
+    // window.requestAnimationFrame( this.update.bind(this) );
     this.plane_material.uniforms['time'].value = this.clock.getElapsedTime();
     // console.log(this.terrain_sphere.getSoundDataWave())
     // this.plane_material.uniforms['noise_range'].value = noise_range;

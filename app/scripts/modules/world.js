@@ -3,6 +3,7 @@ import { Sphere } from './sphere';
 import { Terrain } from './terrain';
 import { Circle } from './circle';
 import { Glitch } from './glitch';
+import { Particles } from './particles';
 import { Sound } from './sound';
 // import { Test } from './test';
 
@@ -59,15 +60,11 @@ class World {
 
     init() {
     	this.scene = new THREE.Scene();
-      // this.camera = new THREE.PerspectiveCamera( 260, this.params.width / this.params.height, 1, 10000 );
     	this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100000 );
-      // this.camera.position.z = 7;
-      // this.camera.position.y = 1;
-        // this.camera = new THREE.OrthographicCamera( this.params.width / - 2, this.params.width / 2, this.params.height / 2, this.params.height / - 2, 1, 10000 );
     	
       this.scene.add( this.camera );
       this.addLights();
-        // this.addControls();
+      // this.addControls();
       this.renderer = new THREE.WebGLRenderer({
 	        antialias: true
 	    });
@@ -81,7 +78,8 @@ class World {
 
 
       this.addSphere();
-      // this.addTerrain( this.sphere );
+      this.addParticles(this.scene, this.sound);
+      this.addTerrain( this.sphere );
       this.addGlitch( this.renderer, this.scene, this.camera )
 
       this.addListeners();
@@ -92,6 +90,9 @@ class World {
     addLights() {
         var ambient = new THREE.AmbientLight( 0x777777 );
         this.scene.add( ambient );
+
+        // var ambientWhiteLight = new THREE.AmbientLight( 0x404040 ); // soft white light
+        // this.scene.add( ambientWhiteLight );
 
         var directionalLight = new THREE.DirectionalLight( 0xe2ffaa );
         directionalLight.position.x = 0;
@@ -113,6 +114,12 @@ class World {
     	this.scene.add( this.sphere.getMesh() );
     }
 
+    addParticles(scene, sound) {
+      this.particles = new Particles(scene, sound);
+      this.scene.add( this.particles.getMesh() );
+      console.log("mesh text : ", this.particles.getMesh())
+    }
+
     addTerrain( sphere ) {
       this.terrain = new Terrain( sphere );
       this.scene.add( this.terrain.getMesh() );
@@ -123,6 +130,31 @@ class World {
       this.glitch = new Glitch( renderer, scene, camera );
       this.glitch.render();  
     }
+
+    // addPostProcess(){
+    //   // postprocessing
+
+    //     var renderModel = new THREE.RenderPass( scene, camera );
+    //     var effectBloom = new THREE.BloomPass( 0.75 );
+    //     var effectFilm = new THREE.FilmPass( 0.5, 0.5, 1448, false );
+
+    //     effectFocus = new THREE.ShaderPass( THREE.FocusShader );
+
+    //     effectFocus.uniforms[ "screenWidth" ].value = window.innerWidth;
+    //     effectFocus.uniforms[ "screenHeight" ].value = window.innerHeight;
+
+    //     effectFocus.renderToScreen = true;
+
+    //     composer = new THREE.EffectComposer( renderer );
+
+    //     composer.addPass( renderModel );
+    //     composer.addPass( effectBloom );
+    //     composer.addPass( effectFilm );
+    //     composer.addPass( effectFocus );
+    // }
+
+
+
 
     getScene() {
       return this.scene;
@@ -135,7 +167,8 @@ class World {
           this.render( ts );
           this.tmpData = this.sound.getData();
           this.sphere.update(ts , this.tmpData);
-          // this.terrain.update();
+          this.terrain.update();
+          this.particles.update();
 
 
           // this.glitch.render();
@@ -152,6 +185,7 @@ class World {
     	window.addEventListener( 'resize', this.onWindowResize.bind( this ), false );
     	this.keyboard = new Keyboard();	
       this.keyboard.addObject( this.sphere.getMesh() );
+      // this.keyboard.addObject( this.particles.getMesh() );
       // this.keyboard.addObject( this.terrain.getMesh() );
     }
 

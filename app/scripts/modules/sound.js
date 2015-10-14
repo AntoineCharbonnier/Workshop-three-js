@@ -35,11 +35,15 @@ class Sound {
       this._source.connect( this._analyser )
       this._source.buffer = buffer
       this._source.connect( this._context.destination )
-      this._source.start( 0 )
+      // this._source.start( 0 )
 
     }, () => {
       console.log( "error" )
     } )
+  }
+
+  start() {
+    this._source.start( 0 )
   }
 
   getData() {

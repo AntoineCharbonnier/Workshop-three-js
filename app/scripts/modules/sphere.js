@@ -1,14 +1,9 @@
-
 // let THREE = require('../vendors/three.min');
 let glslify = require('glslify');
-
-
-
 
 class Sphere {
 
   constructor() {
-
 
     this.vertexShader   = glslify('../../vertex-shaders/ashima.vert');
     this.fragmentShader = glslify('../../fragment-shaders/sphere-color.frag');
@@ -46,11 +41,8 @@ class Sphere {
     this.waveData = null;
     this.barData  = null;
 
-
     this.meshGeometry = new THREE.DodecahedronGeometry( 20, 3 );
     // this.buffergeometry = new THREE.BufferGeometry().fromGeometry(this.meshGeometry);
-
-
     // this.mesh   = new THREE.Mesh( this.meshGeometry, this.meshMaterial );
 
     //  NEW
@@ -67,10 +59,6 @@ class Sphere {
       this.meshMaterial
     ));
 
-
-
-
-
     this.mesh.position.z = -150;
     
     this.clock           = Date.now();
@@ -79,19 +67,11 @@ class Sphere {
     this.weight          = 5;
     this.opacity         = 0.0;
 
-    // this.update();
-    // console.log("nb vertices : ", this.mesh.geometry.attributes.position.array.length / 3)
-    // console.log("ff",this.mesh)
-    // this.mesh.children[0].geometry.dynamic = true;
-    // this.mesh.children[1].geometry.dynamic = true;
-
     return this;
   }
 
-
-
   update( ts, data ) {
-    window.requestAnimationFrame( this.update.bind(this) );
+    // window.requestAnimationFrame( this.update.bind(this) );
 
     /* update soudn data for everyone bitch */
     // this.waveData = tmpData.time
@@ -140,7 +120,6 @@ class Sphere {
   getSoundDataBar(){
     return this.barData;
   }
-
 
   getMesh() {
     return this.mesh;
