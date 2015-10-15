@@ -8,3 +8,38 @@ html, body {
 	padding: 0;
 	overflow: hidden;
 }
+
+.container{
+	position: absolute;
+	display: table;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+/*	webkit-transfrom : translateX(-50%) translateY(-50%);
+	moz-transfrom : translateX(-50%) translateY(-50%);
+	transfrom : translateX(-50%) translateY(-50%);
+*/
+	.content{
+		display: table-cell;
+		vertical-align: middle;
+		margin: 0 auto;
+	}
+	h1{
+		font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+		position: relative;
+		top: 100px;
+		color: white;
+		text-align: center;
+		font-size: 25px;
+	}
+	h1#load{
+		opacity: 0;
+	}
+	h1#wait{
+		opacity: 1;
+	}
+	h1#reload{
+		opacity: 0;
+	}
+}

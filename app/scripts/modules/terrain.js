@@ -23,6 +23,7 @@ class Terrain {
 
     this.vertexShader   = glslify('../../vertex-shaders/terrain-sombrero.vert');
     this.fragmentShader = glslify('../../fragment-shaders/terrain.frag');
+    // this.fragmentShader = glslify('../../fragment-shaders/cloud.frag');
 
     /* FROM SAMSY */
     this.options = {
@@ -56,6 +57,12 @@ class Terrain {
     };
 
     this.uniforms = {
+      iResolution : { type: "v3", value: new THREE.Vector3(1000,1000,1000) },
+      iGlobalTime: { type: "f", value: 1.0 },
+      iMouse: { type: "v4", value: new THREE.Vector4(200,200,200,200) },
+      R: { type: "v3", value: new THREE.Vector3() },
+      L: { type: "v3", value: new THREE.Vector3() },
+
       time: {
         type: "f",
         value: 0.0
@@ -99,6 +106,12 @@ class Terrain {
     };
 
     this.uniforms2 = {
+      iResolution : { type: "v3", value: new THREE.Vector3(1000,1000,1000) },
+      iGlobalTime: { type: "f", value: 1.0 },
+      iMouse: { type: "v4", value: new THREE.Vector4(200,200,200,200) },
+      R: { type: "v3", value: new THREE.Vector3() },
+      L: { type: "v3", value: new THREE.Vector3() },
+
       time: {
         type: "f",
         value: 0.0
@@ -178,6 +191,8 @@ class Terrain {
     
     this.materials  = [this.groundMaterial, this.plane_material];
     this.materials2 = [this.groundMaterial2, this.plane_material2];
+    // this.materials  = [ this.plane_material];
+    // this.materials2 = [ this.plane_material2];
     
     this.plane_mesh = new THREE.Object3D()
 
@@ -192,12 +207,15 @@ class Terrain {
     this.plane_mesh.rotation.x = -Math.PI / 2;
     this.plane_mesh.position.y = -2;
 
+    this.tick = 0;
+
     return this;
   }
 
 
 
   update( ts, data) {
+    this.tick += 1
     this.plane_material.uniforms['time'].value = this.clock.getElapsedTime();
     this.plane_material2.uniforms['time'].value = this.clock.getElapsedTime();
 
@@ -240,6 +258,28 @@ class Terrain {
 
         this.plane_material.uniforms['perlin_passes'].value = this.noiseDisplacementPic ;
         this.plane_material2.uniforms['perlin_passes'].value = this.noiseDisplacementPic ;
+
+
+
+        // this.plane_material.uniforms[ 'iGlobalTime' ].value = this.tick / 100;
+        // this.plane_material.uniforms[ 'iResolution' ].value = new THREE.Vector3(1,1,1);
+        // this.plane_material.uniforms[ 'iMouse' ].value = new THREE.Vector4(1000,1000,100,0);
+        // this.plane_material.uniforms[ 'R' ].value = new THREE.Vector3(2.,4.,2.);
+        // this.plane_material.uniforms[ 'L' ].value = new THREE.Vector3(-.4,0.,1.);
+
+
+        // this.plane_material2.uniforms[ 'iGlobalTime' ].value = this.tick / 100;
+        // this.plane_material2.uniforms[ 'iResolution' ].value = new THREE.Vector3(1,1,1);
+        // this.plane_material2.uniforms[ 'iMouse' ].value = new THREE.Vector4(1000,1000,100,0);
+        // this.plane_material2.uniforms[ 'R' ].value = new THREE.Vector3(2.,4.,2.);
+        // this.plane_material2.uniforms[ 'L' ].value = new THREE.Vector3(-.4,0.,1.);
+
+
+
+
+
+
+
       }
     }
 

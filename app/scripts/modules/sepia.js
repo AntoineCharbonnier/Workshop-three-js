@@ -1,36 +1,33 @@
 let glslify        = require('glslify');
 
-class Glitch {
+class Sepia {
 
   constructor( renderer, scene , camera ) {
     
 		this.composer = new THREE.EffectComposer( renderer );
 		this.composer.addPass( new THREE.RenderPass( scene, camera ) );
-
-		this.glitchPass = new THREE.GlitchPass();
-		this.glitchPass.renderToScreen = true;
-
-		this.composer.addPass( this.glitchPass );
+    
+    this.shaderSepia                            = THREE.SepiaShader;
+    this.effectSepia                            = new THREE.ShaderPass( this.shaderSepia );
+    this.effectSepia.uniforms[ "amount" ].value = 1;
+    
+    this.renderToScreen = true;
+		this.composer.addPass( this.effectSepia );
+    this.delta = 0.1;
 
     return this;
   }
 
-
   update( ts, data ) {
-    if( this.averageData("freq" , data, 200, 250) > 28 ){
-      this.render()
-    }
-    if(this.averageData("freq" , data, 200, 250) > 30){
-      this.glitchPass.goWild = true;
-      this.render()
-    }
-    else{
-      this.glitchPass.goWild = false;
+    if( data && data != "undefined" ){
+      if( (180 < this.averageData("freq", data, 0, 20))  && (this.averageData("freq", data, 0, 20) < 200) ){ 
+        this.render()
+      }
     }
   }
 
   render(){
-  	this.composer.render()
+  	this.composer.render(this.delta)
   }
 
   averageData(type, inputData, numberStart, numberAfer){
@@ -50,4 +47,4 @@ class Glitch {
 
 }
 
-export { Glitch };
+export { Sepia };

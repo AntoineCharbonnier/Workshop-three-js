@@ -1,4 +1,3 @@
-// let THREE = require('../vendors/three.min');
 let glslify = require('glslify');
 
 class Sphere {
@@ -48,10 +47,7 @@ class Sphere {
     this.barData  = null;
 
     this.meshGeometry = new THREE.DodecahedronGeometry( 20, 5 );
-    // this.buffergeometry = new THREE.BufferGeometry().fromGeometry(this.meshGeometry);
-    // this.mesh   = new THREE.Mesh( this.meshGeometry, this.meshMaterial );
 
-    //  NEW
     this.mesh = new THREE.Object3D()
     this.mesh.add( 
       new THREE.Mesh(
@@ -65,7 +61,10 @@ class Sphere {
       this.meshMaterial
     ));
 
-    this.mesh.position.z = -150;
+    // this.mesh.position.z = -150;
+    this.mesh.position.z = -104;
+    this.mesh.position.y = 18;
+
     
     this.clock           = Date.now();
     
@@ -85,12 +84,6 @@ class Sphere {
   }
 
   update( ts, data ) {
-    // window.requestAnimationFrame( this.update.bind(this) );
-
-    /* update soudn data for everyone bitch */
-    // this.waveData = tmpData.time
-    // this.barData  = this.tmpData.freq
-
     if(data && data != "undefined"){
       if(data.freq[200] > 100 ){
         // mesh 1 lower & mesh 2 greater
@@ -99,7 +92,6 @@ class Sphere {
         }
         if(this.opacity < 0.9){
           if(data.freq[200] > 140){
-            // console.log(data.freq[200])
             this.weight += 0.1
           }
           else{
@@ -112,12 +104,11 @@ class Sphere {
       else{
         // mesh 1 greater & mesh 2 lower
         if(this.opacity > 0){
-          this.opacity -= 0.01;
+          this.opacity -= 0.05;
         }
       }
 
-      //  voice ? with color
-      // console.log( this.averageData("fred" , data, 80, 170) )
+      //  voice with color
       if(this.averageData("fred" , data, 0, 80) > 100){
         this.redValue   += this.stepRed
       }
@@ -137,10 +128,7 @@ class Sphere {
         this.blueValue  -= this.stepBlue
       }
 
-      // console.log(this.redValue,this.greenValue,this.blueValue)
-
       if((this.redValue >= 1 || this.greenValue >= 1 || this.blueValue >= 1) || (this.redValue <= 0.2 || this.greenValue <= 0.2 || this.blueValue <= 0.2) ){
-        // this.blueValue = this.greenValue = this.redValue = 0
         this.stepRed   = (this.stepRed) * -1
         this.stepGreen = (this.stepGreen) * -1
         this.stepBlue  = (this.stepBlue) * -1
@@ -150,12 +138,6 @@ class Sphere {
       this.meshMaterial2.uniforms[ 'opacity' ].value = this.opacity;
     }
 
-    // this.meshMaterial2.uniforms[ 'opacity' ].value = 0.5;
-    // }
-    // console.log(this.opacity)
-
-    // this.meshMaterial.uniforms[ 'opacity' ].value  = 0;
-    // this.meshMaterial2.uniforms[ 'opacity' ].value = 0;
 
     this.meshMaterial.uniforms[ 'time' ].value        = this.speed * ( Date.now() - this.clock );
     this.meshMaterial.uniforms[ 'weight' ].value      = this.weight;
@@ -166,10 +148,6 @@ class Sphere {
     this.meshMaterial2.uniforms[ 'redValue' ].value   = this.redValue;
     this.meshMaterial2.uniforms[ 'greenValue' ].value = this.greenValue;
     this.meshMaterial2.uniforms[ 'blueValue' ].value  = this.blueValue;
-
-    // this.meshMaterial.uniforms[ 'redValue' ].value   = this.redValue;
-    // this.meshMaterial.uniforms[ 'greenValue' ].value = this.greenValue;
-    // this.meshMaterial.uniforms[ 'blueValue' ].value  = this.blueValue;
 
   }
 
@@ -187,7 +165,6 @@ class Sphere {
     }
     return average / numberAfer;
   }
-
 
   setWeight( _weight ) {
     this.weight = _weight;

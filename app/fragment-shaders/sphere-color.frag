@@ -22,9 +22,10 @@ void main() {
     // float red    = redValue + sin(position.x * position.y + clamp( time / 5.0, 191.0 / 255.0, 38.0 / 255.0 ));
     // float green  = greenValue + sin(position.x * position.y + clamp( time / 4.0, 209.0 / 255.0, 118.0 / 255.0 ));
     // float blue   = blueValue + sin(position.x * position.y + clamp( time / 3.0, 228.0 / 255.0, 173.0 / 255.0 ) );
-    float red    = redValue + sin(position.x * position.y +time);
-    float green  = greenValue + sin(position.x * position.y + time);
-    float blue   = blueValue + sin(position.x * position.y + time );
+    
+    float red    = redValue   + sin(position.x * position.y + clamp(time / 20.0, time / 20.0, time / 20.0) );
+    float green  = greenValue + sin(position.x * position.y + clamp(time / 20.0, time / 20.0, time / 20.0) );
+    float blue   = blueValue  + sin(position.x * position.y + clamp(time / 20.0, time / 20.0, time / 20.0) );
 
 
     gl_FragColor = vec4(red , green , blue , opacity);

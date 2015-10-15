@@ -1,31 +1,25 @@
 let glslify        = require('glslify');
 
-class Glitch {
+class DotScreen {
 
   constructor( renderer, scene , camera ) {
     
 		this.composer = new THREE.EffectComposer( renderer );
 		this.composer.addPass( new THREE.RenderPass( scene, camera ) );
 
-		this.glitchPass = new THREE.GlitchPass();
-		this.glitchPass.renderToScreen = true;
-
-		this.composer.addPass( this.glitchPass );
+		this.dotScreen = new THREE.DotScreenPass( new THREE.Vector2( 0, 0 ), 0.5, 0.8 );
+		this.dotScreen.renderToScreen = true;
+		this.composer.addPass( this.dotScreen );
 
     return this;
   }
 
 
   update( ts, data ) {
-    if( this.averageData("freq" , data, 200, 250) > 28 ){
-      this.render()
-    }
-    if(this.averageData("freq" , data, 200, 250) > 30){
-      this.glitchPass.goWild = true;
-      this.render()
-    }
-    else{
-      this.glitchPass.goWild = false;
+    if( data && data != "undefined" ){
+      if( (155 < this.averageData("freq", data, 0, 20))  && (this.averageData("freq", data, 0, 20) < 180) ){ // && (this.averageData("freq", data, 0, 20) < 155)
+        this.render()
+      }
     }
   }
 
@@ -50,4 +44,4 @@ class Glitch {
 
 }
 
-export { Glitch };
+export { DotScreen };

@@ -25,7 +25,7 @@ class Particles {
       opacity:        1
     });
 
-    this.geom = new THREE.TextGeometry( "WELCOME", {
+    this.geom = new THREE.TextGeometry( "ODESZA", {
       size: 10,
       height: 1,
       curveSegments: 4,
@@ -86,6 +86,8 @@ class Particles {
         console.log("click")
         if(this.launchedSound){
           this.launchedSound = false
+          var load = document.getElementById("load");
+          TweenLite.to(load, 0.5, {autoAlpha: 0});
           this.sound.start()
         }
       }.bind(this)
