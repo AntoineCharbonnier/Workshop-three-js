@@ -2,5 +2,8 @@
 
 ## Installation
 
+npm install
 
- 
+## Run
+
+gulp server
