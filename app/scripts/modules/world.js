@@ -275,7 +275,7 @@ class World {
 	    this.camera.updateProjectionMatrix();
 
       this.renderer.setSize( this.params.width, this.params.height );
-	    this.composer.setSize( this.params.width, this.params.height );
+	    // this.composer.setSize( this.params.width, this.params.height );
     }
 
 }
