@@ -46,7 +46,8 @@ class Sphere {
     this.waveData = null;
     this.barData  = null;
 
-    this.meshGeometry = new THREE.DodecahedronGeometry( 20, 5 );
+    this.meshGeometry = new THREE.DodecahedronGeometry( 20, 4 );
+    // this.meshGeometry = new THREE.SphereGeometry( 20, 32, 32, 0, 6.3, 0, 3.1 );
 
     this.mesh = new THREE.Object3D()
     this.mesh.add( 
@@ -109,19 +110,19 @@ class Sphere {
       }
 
       //  voice with color
-      if(this.averageData("fred" , data, 0, 80) > 100){
+      if(window.averageData("fred" , data, 0, 80) > 100){
         this.redValue   += this.stepRed
       }
       else{
         this.redValue   -= this.stepRed
       }
-      if(this.averageData("fred" , data, 80, 160) > 100){
+      if(window.averageData("fred" , data, 80, 160) > 100){
         this.greenValue += this.stepGreen
       }
       else{
         this.greenValue -= this.stepGreen
       }
-      if(this.averageData("fred" , data, 160, 255) > 100){
+      if(window.averageData("fred" , data, 160, 255) > 100){
         this.blueValue  += this.stepBlue
       }
       else{
@@ -151,20 +152,20 @@ class Sphere {
 
   }
 
-  averageData(type, inputData, numberStart, numberAfer){
-    var average = 0;
-    if(type == "freq"){    
-      for(var i = numberStart; i < numberAfer; i++){
-        average += inputData.freq[i]
-      }
-    }
-    else{
-      for(var i = 0; i < numberAfer; i++){
-        average += inputData.time[i]
-      }
-    }
-    return average / numberAfer;
-  }
+  // averageData(type, inputData, numberStart, numberAfer){
+  //   var average = 0;
+  //   if(type == "freq"){    
+  //     for(var i = numberStart; i < numberAfer; i++){
+  //       average += inputData.freq[i]
+  //     }
+  //   }
+  //   else{
+  //     for(var i = 0; i < numberAfer; i++){
+  //       average += inputData.time[i]
+  //     }
+  //   }
+  //   return average / numberAfer;
+  // }
 
   setWeight( _weight ) {
     this.weight = _weight;

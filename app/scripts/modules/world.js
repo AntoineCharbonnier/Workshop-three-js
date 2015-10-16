@@ -20,6 +20,8 @@ class World {
 
         let options    = _options || {};
         
+        console.log("options", options)
+
         this.scene     = null;
         this.camera    = null;
         this.renderer  = null;
@@ -48,6 +50,7 @@ class World {
         this.sound = new Sound();
         // this.sound.load( "mp3/InDaClub-50Cent.mp3" )
         this.sound.load( "mp3/odesza-say-my-name.mp3" )
+
         this.tmpData = this.sound.getData();
 
     }
@@ -63,7 +66,7 @@ class World {
       this.addLights()
       // this.addControls();
       this.renderer = new THREE.WebGLRenderer({
-	        antialias: true
+	        antialias: false
 	    });
 
 	    // this.renderer.setClearColor(  0xffffff, 1 );
@@ -134,11 +137,12 @@ class World {
 
       this.addSphere()
       this.addParticles(this.scene, this.sound)
+      // this.particles.launchSound()
       this.addTerrain( this.sphere )
       this.addGround()
       this.addGlitch( this.renderer, this.scene, this.camera )
-      this.addDotScreen( this.renderer, this.scene, this.camera )
-      this.addSepia( this.renderer, this.scene, this.camera )
+      // this.addDotScreen( this.renderer, this.scene, this.camera )
+      // this.addSepia( this.renderer, this.scene, this.camera )
       this.addVignette( this.renderer, this.scene, this.camera )
 
       this.addListeners()
@@ -205,30 +209,6 @@ class World {
     addVignette( renderer, scene, camera ){
       this.vignette = new Vignette( renderer, scene, camera )
     }
-    // addPostProcess(){
-    //   // postprocessing
-
-        // var renderModel = new THREE.RenderPass( scene, camera );
-        // var effectBloom = new THREE.BloomPass( 0.75 );
-        // var effectFilm = new THREE.FilmPass( 0.5, 0.5, 1448, false );
-
-        // effectFocus = new THREE.ShaderPass( THREE.FocusShader );
-
-        // effectFocus.uniforms[ "screenWidth" ].value = window.innerWidth;
-        // effectFocus.uniforms[ "screenHeight" ].value = window.innerHeight;
-
-        // effectFocus.renderToScreen = true;
-
-        // composer = new THREE.EffectComposer( renderer );
-
-        // composer.addPass( renderModel );
-        // composer.addPass( effectBloom );
-        // composer.addPass( effectFilm );
-        // composer.addPass( effectFocus );
-    // }
-
-
-
 
     getScene() {
       return this.scene;
@@ -246,8 +226,8 @@ class World {
           this.particles.update();
 
           this.glitch.update(ts, this.tmpData)
-          this.dotscreen.update(ts, this.tmpData)
-          this.sepia.update(ts, this.tmpData)
+          // this.dotscreen.update(ts, this.tmpData)
+          // this.sepia.update(ts, this.tmpData)
           this.vignette.update(ts, this.tmpData)
       }
     }
@@ -277,6 +257,8 @@ class World {
       this.renderer.setSize( this.params.width, this.params.height );
 	    // this.composer.setSize( this.params.width, this.params.height );
     }
+
+
 
 }
 

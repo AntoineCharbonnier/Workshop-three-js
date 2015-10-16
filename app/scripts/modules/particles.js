@@ -119,23 +119,16 @@ class Particles {
 
       this.geometry2.attributes.position.needsUpdate = true;
       this.shaderMaterial2.uniforms[ 'alpha' ].value = this.opacity;
-      // this.shaderMaterial2.needsUpdate = true
-      // if(this.opacity < 0.002 && this.blocker){
-      //   this.blocker = false
-      //   setTimeout(
-      //     function(){ 
-      //       // console.log(this.scene)
-      //       this.scene.remove(this.particleSystem)
-      //       // console.log(this.scene)
-      //     }.bind(this), 
-      //     1000
-      //   );
-      // }
     }
   }
 
   getMesh(){
     return this.particleSystem;
+  }
+
+
+  launchSound(){
+    this.sound.start()
   }
 
 }

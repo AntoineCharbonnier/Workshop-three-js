@@ -25,7 +25,7 @@ class Vignette {
       this.render()
     }
     if( this.averageData("freq" , data, 0, 50) > 200 ){
-      this.effectVignette.uniforms[ "offset" ].value   = 1.5;
+      this.effectVignette.uniforms[ "offset" ].value   = 0.95;
       this.effectVignette.uniforms[ "darkness" ].value = 2.6;
       this.render()
     }
