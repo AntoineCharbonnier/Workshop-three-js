@@ -12,7 +12,10 @@
     <link rel="stylesheet" type="text/css" href="styles/main.css">
     <script src="http://antoinecharbonnier.fr/dev/three/postprocessing/three.min.js"></script>
     <script src="http://antoinecharbonnier.fr/dev/GreenSock-ShockinglyGreen-js/src/minified/TweenMax.min.js"></script>
-
+    <script src="http://antoinecharbonnier.fr/dev/GreenSock-ShockinglyGreen-js/src/minified/TimelineMax.min.js"></script>
+    <script src="http://antoinecharbonnier.fr/GreenSock-ShockinglyGreen-js/src/uncompressed/utils/SplitText.js"></script>
+    <script src="http://antoinecharbonnier.fr/GreenSock-ShockinglyGreen-js/src/uncompressed/plugins/ScrambleTextPlugin.js"></script>
+    
     <script src="http://antoinecharbonnier.fr/dev/three/postprocessing/BleachBypassShader.js"></script>
     <script src="http://antoinecharbonnier.fr/dev/three/postprocessing/BloomPass.js"></script>
     <script src="http://antoinecharbonnier.fr/dev/three/postprocessing/ColorifyShader.js"></script>
@@ -39,7 +42,6 @@
     <script src="http://antoinecharbonnier.fr/dev/three/postprocessing/optimer_typeface.js"></script>
   </head>
   <body>
-    <script src="scripts/main.js"></script>
     <!-- SVG Sprite -->
     <div style="height: 0; width: 0; position: absolute; visibility: hidden;" aria-hidden="true">
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" focusable="false">
@@ -60,39 +62,76 @@
         </symbol>
       </svg>
     </div>
+    <div style="height: 0; width: 0; position: absolute; visibility: hidden;" aria-hidden="true">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" focusable="false">
+        <!-- Because of Firefox. -->
+        <defs>
+          <radialGradient id="gradient">
+            <stop offset="0" stop-color="#2e2e2f" />
+            <stop offset="0.25" stop-color="#4b4b4b" />
+            <stop offset="0.35" stop-color="#2e2e2f" />
+            <stop offset="0.50" stop-color="#4b4b4b" />
+            <stop offset="0.60" stop-color="#2e2e2f" />
+            <stop offset="0.85" stop-color="#4b4b4b" />
+            <stop offset="1" stop-color="#2e2e2f" />
+          </radialGradient>
+        </defs>
+        <symbol id="ripply-scott2" viewBox="0 0 100 100">
+          <circle id="ripple-shape" fill="url(#gradient)" cx="1" cy="1" r="1" />
+        </symbol>
+      </svg>
+    </div>
     <!-- /end sprite -->
 
     <div class="container">
       <!-- <div class="content"> -->
-      <h1 id="wait">Wait please</h1>
+<!--       <h1 id="wait">Wait please</h1>
       <h1 id="load">The sound is loaded ! Click...</h1>
-      <h1 id="reload">Reload for replay</h1>
+      <h1 id="reload">Reload for replay</h1> -->
       <!-- </div> -->
+
       <div id="choices">
         <div class="center-alignement">
-          <h1>Choose quality :</h1>
-          <div class="select-quality">
-<!--             <a href="#" id="low">Low</a>
-            <a href="#" id="high">High</a> -->
-            <button id="low" class="button styl-material">
-              Click for Ripple
-              <svg class="ripple-obj" id="js-ripple">
-                <use height="100" width="100" xlink:href="#ripply-scott" class="js-ripple"></use>
-              </svg>
-            </button>
-            <button id="high" class="button styl-material">
-              Click for Ripple
-              <svg class="ripple-obj" id="js-ripple">
-                <use height="100" width="100" xlink:href="#ripply-scott" class="js-ripple"></use>
-              </svg>
-            </button>
+          <div class="about">
+            <div class="name">
+              <h1 class="O">O</h1>
+
+              <h1 class="D">D</h1>
+
+              <h1 class="E">E</h1>
+
+              <h1 class="S">S</h1>
+
+              <h1 class="Z">Z</h1>
+
+              <h1 class="A">A</h1>
+            </div class="name">
+            <h2>An experiment made by <a href="http://antoinecharbonnier.fr" target="_blank" >Antoine Charbonnier</a> </h2> 
+            <hr>
+          </div>
+          <div class="select-quality--container">          
+            <h1>Choose experiment quality :</h1>
+            <h3>Depending on your GPU skills</h3>
+            <div class="select-quality--content">
+              <button id="low" class="button styl-material">
+                Low
+                <svg class="ripple-obj" id="js-ripple">
+                  <use height="100" width="100" xlink:href="#ripply-scott" class="low"></use>
+                </svg>
+              </button>
+              <button id="high" class="button styl-material">
+                High
+                <svg class="ripple-obj" id="js-ripple">
+                  <use height="100" width="100" xlink:href="#ripply-scott2" class="high"></use>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <!--
-      -->
     </div>
-    <script src="scripts/ripple-config.js"></script>
+    <script src="scripts/UIComponents.js"></script>
+    <script src="scripts/main.js"></script>
   </body>
 </html>
 

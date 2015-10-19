@@ -1,8 +1,6 @@
-var ripplyScott = (function() {
-  var circle = document.querySelectorAll('.button'),
-      ripple = document.querySelectorAll('.js-ripple');
-
-  function rippleAnimation(event, timing) {
+/* FROM tympanus.net */
+var UIComponents = (function() {
+  function UIComponentsAnimation(target, event, timing) {
     var tl           = new TimelineMax();
         x            = event.offsetX,
         y            = event.offsetY,
@@ -14,15 +12,7 @@ var ripplyScott = (function() {
         deltaY       = (h / 2) + offsetY,
         scale_ratio  = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
 
-    console.log('x is:' + x);
-    console.log('y is:' + y);
-    console.log('offsetX is:' + offsetX);
-    console.log('offsetY is:' + offsetY);
-    console.log('deltaX is:' + deltaX);
-    console.log('deltaY is:' + deltaY);
-    console.log('width is:' + w);
-    console.log('height is:' + h);
-    console.log('scale ratio is:' + scale_ratio);
+    ripple =  document.querySelectorAll('.'+target)
 
     tl.fromTo(ripple, timing, {
       x: x,
@@ -44,11 +34,11 @@ var ripplyScott = (function() {
       var button = document.getElementById(target);
 
       button.addEventListener('click', function(event) {
-        rippleAnimation.call(this, event, timing);
+        UIComponentsAnimation.call(this, target, event, timing);
+        // HERE ADD THE NEXT : BIND TO LAUNCH EVENT WITH QUALITY 
+        // BEFORE ON SOUND.JS & PARTICLES.JS
+        
       });
     }
   };
 })();
-
-ripplyScott.init('low', 0.75);
-ripplyScott.init('high', 0.75);

@@ -37,10 +37,10 @@ class Sound {
       this._source.connect( this._context.destination )
 
       //  explication
-      var wait = document.getElementById("wait");
-      var load = document.getElementById("load");
-      TweenLite.to(wait, 0.5, {autoAlpha: 0});
-      TweenLite.to(load, 0.5, {autoAlpha: 1});
+      // var wait = document.getElementById("wait");
+      // var load = document.getElementById("load");
+      // TweenLite.to(wait, 0.5, {autoAlpha: 0});
+      // TweenLite.to(load, 0.5, {autoAlpha: 1});
 
     }, () => {
       console.log( "error" )
