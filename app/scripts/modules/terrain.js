@@ -3,10 +3,12 @@ let PERLIN_NOISE = require('../vendors/improved_perlin_noise');
 
 class Terrain {
 
-  constructor(sphere) {
+  constructor( quality ) {
 
-    this.worldWidth           = 256
-    this.worldDepth           = 256
+    this.quality = quality
+
+    this.worldWidth           = this.quality ? 256 : 64
+    this.worldDepth           = this.quality ? 256 : 64
     this.worldHalfWidth       = this.worldWidth / 2
     this.worldHalfDepth       = this.worldDepth / 2
     this.opacity              = 0.0;
@@ -14,8 +16,6 @@ class Terrain {
     this.amplitude = 0.0;
 
     this.clock = new THREE.Clock();
-
-    this.terrain_sphere = sphere
 
     this.vertexShader   = glslify('../../vertex-shaders/terrain-sombrero.vert');
     this.fragmentShader = glslify('../../fragment-shaders/terrain.frag');
@@ -27,7 +27,7 @@ class Terrain {
       sombrero_amplitude: 0.6,
       sombrero_frequency: 10.0,
       speed: 0.8,
-      segments: 332,
+      segments: this.quality ? 332 : 166,
       wireframe_color: '#ff0000',
       perlin_passes: 1,
       wireframe: false,
@@ -138,8 +138,11 @@ class Terrain {
     };
 
 
-    this.plane_geometry = new THREE.PlaneBufferGeometry(20, 20, this.options.segments, this.options.segments);
-    this.plane_geometry2 = new THREE.PlaneBufferGeometry(20, 20, this.options.segments, this.options.segments);
+    this.squareSize = this.quality ? 20 : 10
+
+    this.plane_geometry = new THREE.PlaneBufferGeometry(this.squareSize, this.squareSize, this.options.segments, this.options.segments);
+    this.plane_geometry2 = new THREE.PlaneBufferGeometry(this.squareSize, this.squareSize, this.options.segments, this.options.segments);
+
     
     this.plane_material = new THREE.ShaderMaterial({
       vertexShader: this.vertexShader,
@@ -189,6 +192,12 @@ class Terrain {
 
     this.plane_mesh.rotation.x = -Math.PI / 2;
     this.plane_mesh.position.y = -2;
+
+    if(this.quality == false){
+      // console.log("fuck")
+      this.plane_mesh.position.y = -2;
+      this.plane_mesh.position.z = -6;
+    }
 
     this.tick = 0;
 

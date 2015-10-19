@@ -18,132 +18,77 @@ class World {
 
     constructor( _options ) {
 
-        let options    = _options || {};
-        
-        console.log("options", options)
+      //  true == HIGH QUALITY
+      this.quality = false
 
-        this.scene     = null;
-        this.camera    = null;
-        this.renderer  = null;
-        this.composer  = null;
-        this.keyboard  = null;
-        this.container = options.container || document.body;
-        this.controls  = null;
-        // this.sound = null;
+      let options    = _options || {};
+      
+      console.log("options", options)
 
-        this.sphere = null;
-        this.ground = null;
+      this.scene     = null;
+      this.camera    = null;
+      this.renderer  = null;
+      this.composer  = null;
+      this.keyboard  = null;
+      this.container = options.container || document.body;
+      this.controls  = null;
+      // this.sound = null;
 
-      	this.params = {
-              active: options.active || true,
-              height: options.height || window.innerHeight,
-              width:  options.width  || window.innerWidth
-      	};
+      this.sphere = null;
+      this.ground = null;
 
-      	this.mouse = {
-  	        x: null,
-  	        y: null
-  	    };
+    	this.params = {
+            active: options.active || true,
+            height: options.height || window.innerHeight,
+            width:  options.width  || window.innerWidth
+    	};
 
-  	    this.clock = null;
+    	this.mouse = {
+	        x: null,
+	        y: null
+	    };
 
-        this.sound = new Sound();
-        // this.sound.load( "mp3/InDaClub-50Cent.mp3" )
-        this.sound.load( "mp3/odesza-say-my-name.mp3" )
+	    this.clock = null;
 
-        this.tmpData = this.sound.getData();
+      this.sound = new Sound();
+      // this.sound.load( "mp3/InDaClub-50Cent.mp3" )
+      this.sound.load( "mp3/odesza-say-my-name.mp3" )
+
+      this.tmpData = this.sound.getData();
 
     }
 
     init() {
     	this.scene = new THREE.Scene()
-      this.fog = new THREE.Fog( 0xff00ff, -0.1, 10000 )
-      // this.fog = new THREE.FogExp2( 0xff00ff, 0.1 )
-      this.scene.fog = this.fog
-    	this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100000 )
+      // this.fog = new THREE.Fog( 0xff00ff, -0.1, 10000 )
+
+      // this.scene.fog = this.fog
+    	this.camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 100000 )
     	this.camera.position.z = 0
       this.scene.add( this.camera )
       this.addLights()
-      // this.addControls();
+
       this.renderer = new THREE.WebGLRenderer({
-	        antialias: false
+	        antialias: this.quality
 	    });
 
-	    // this.renderer.setClearColor(  0xffffff, 1 );
     	this.renderer.setSize( this.params.width, this.params.height )
 
     	this.container.appendChild( this.renderer.domElement )
 
     	this.clock = Date.now()
-      
 
-      // var shaderBleach = THREE.BleachBypassShader;
-      // var shaderSepia = THREE.SepiaShader;
-      // var shaderVignette = THREE.VignetteShader;
-      // // var shaderCopy = THREE.CopyShader;
-
-      // var effectBleach = new THREE.ShaderPass( shaderBleach );
-      // var effectSepia = new THREE.ShaderPass( shaderSepia );
-      // var effectVignette = new THREE.ShaderPass( shaderVignette );
-      // // var effectCopy = new THREE.ShaderPass( shaderCopy );
-
-      // effectBleach.uniforms[ "opacity" ].value = 0.95;
-
-      // effectSepia.uniforms[ "amount" ].value = 0.9;
-
-      // effectVignette.uniforms[ "offset" ].value = 0.05;
-      // effectVignette.uniforms[ "darkness" ].value = 0.6;
-      // console.log(THREE.BloomPass)
-      // var width = window.innerWidth || 2;
-      // var height = window.innerHeight || 2;
-      // var effectBloom = new THREE.BloomPass( 0.5 ); 
-      // // var effectFilm = new THREE.FilmPass( 0.35, 0.025, 648, false );
-      // // var effectFilmBW = new THREE.FilmPass( 0.35, 0.5, 2048, true );
-      // // var effectDotScreen = new THREE.DotScreenPass( new THREE.Vector2( 0, 0 ), 0.5, 0.8 );
-
-      // // var effectHBlur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
-      // // var effectVBlur = new THREE.ShaderPass( THREE.VerticalBlurShader );
-      // // effectHBlur.uniforms[ 'h' ].value = 2 / ( width / 2 );
-      // // effectVBlur.uniforms[ 'v' ].value = 2 / ( height / 2 );
-
-      // var effectColorify1 = new THREE.ShaderPass( THREE.ColorifyShader );
-      // var effectColorify2 = new THREE.ShaderPass( THREE.ColorifyShader );
-      // effectColorify1.uniforms[ 'color' ].value.setRGB( 1, 0.8, 0.8 );
-      // effectColorify2.uniforms[ 'color' ].value.setRGB( 1, 0.75, 0.5 );
-      
-      // var rtParameters = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat, stencilBuffer: true };
-
-      // var rtWidth  = width / 2;
-      // var rtHeight = height / 2;
-      // this.composer = new THREE.EffectComposer( this.renderer, new THREE.WebGLRenderTarget( rtWidth, rtHeight, rtParameters ) );
-      // this.delta = 0.1
-
-      // this.composer.addPass( new THREE.RenderPass( this.scene, this.camera ) );
-
-
-      // //effectFilm.renderToScreen = true;
-      // //effectFilmBW.renderToScreen = true;
-      // //effectDotScreen.renderToScreen = true;
-      // // effectBleach.renderToScreen = true;
-      // effectVignette.renderToScreen = true;
-      // //effectCopy.renderToScreen = true;
-
-      // // this.composer.addPass( effectBloom )
-      // // this.composer.addPass( effectSepia )
-      // // this.composer.addPass( effectBleach )
-      // this.composer.addPass( effectVignette )
-
-
-
-      this.addSphere()
-      this.addParticles(this.scene, this.sound)
+      this.addSphere( this.quality )
+      this.addParticles( this.scene, this.sound, this.quality )
       // this.particles.launchSound()
-      this.addTerrain( this.sphere )
-      this.addGround()
-      this.addGlitch( this.renderer, this.scene, this.camera )
+      this.addTerrain( this.quality )
+      // this.addGlitch( this.renderer, this.scene, this.camera )
       // this.addDotScreen( this.renderer, this.scene, this.camera )
       // this.addSepia( this.renderer, this.scene, this.camera )
-      this.addVignette( this.renderer, this.scene, this.camera )
+      if(this.quality){
+        this.addGround()
+        this.addVignette( this.renderer, this.scene, this.camera )
+      }
 
       this.addListeners()
     	
@@ -172,18 +117,18 @@ class World {
         this.scene.add( light )
     }
 
-    addSphere() {
-    	this.sphere = new Sphere()
+    addSphere( quality ) {
+    	this.sphere = new Sphere( quality )
     	this.scene.add( this.sphere.getMesh() )
     }
 
-    addParticles(scene, sound) {
-      this.particles = new Particles(scene, sound)
+    addParticles(scene, sound, particles) {
+      this.particles = new Particles(scene, sound, particles)
       this.scene.add( this.particles.getMesh() )
     }
 
-    addTerrain( sphere ) {
-      this.terrain = new Terrain( sphere )
+    addTerrain( quality ) {
+      this.terrain = new Terrain( quality )
       this.scene.add( this.terrain.getMesh() )
     }
 
@@ -220,15 +165,25 @@ class World {
 
           this.render( ts );
           this.tmpData = this.sound.getData();
+
           this.sphere.update(ts , this.tmpData);
           this.terrain.update(ts , this.tmpData);
-          this.ground.update(ts , this.tmpData);
           this.particles.update();
 
-          this.glitch.update(ts, this.tmpData)
+          // this.glitch.update(ts, this.tmpData)
           // this.dotscreen.update(ts, this.tmpData)
           // this.sepia.update(ts, this.tmpData)
-          this.vignette.update(ts, this.tmpData)
+          
+          if(this.quality){
+            this.ground.update(ts , this.tmpData);
+            this.vignette.update(ts, this.tmpData)
+          }
+          else{
+            if(this.particles.opacity < 0.3){
+              this.scene.remove( this.particles.particleSystem )
+              this.scene.remove( this.particles )
+            }
+          }
       }
     }
 
@@ -244,7 +199,9 @@ class World {
       this.keyboard.addObject( this.sphere.getMesh() );
       this.keyboard.addObject( this.particles.getMesh() );
       this.keyboard.addObject( this.terrain.getMesh() );
-      this.keyboard.addObject( this.ground.getMesh() );
+      if(this.quality){
+        this.keyboard.addObject( this.ground.getMesh() );
+      }
     }
 
     onWindowResize() {

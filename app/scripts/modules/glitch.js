@@ -8,19 +8,20 @@ class Glitch {
 		this.composer.addPass( new THREE.RenderPass( scene, camera ) );
 
 		this.glitchPass = new THREE.GlitchPass();
-		this.glitchPass.renderToScreen = true;
+    this.glitchPass.renderToScreen = true;
 
-		this.composer.addPass( this.glitchPass );
+    this.composer.addPass( this.glitchPass );
 
     return this;
   }
 
 
   update( ts, data ) {
-    if( this.averageData("freq" , data, 200, 250) > 28 ){
+    if( window.averageData("freq" , data, 200, 250) > 28 ){
+		  this.glitchPass.renderToScreen = true;
       this.render()
     }
-    if(this.averageData("freq" , data, 200, 250) > 30){
+    if(window.averageData("freq" , data, 200, 250) > 30){
       this.glitchPass.goWild = true;
       this.render()
     }
@@ -31,21 +32,6 @@ class Glitch {
 
   render(){
   	this.composer.render()
-  }
-
-  averageData(type, inputData, numberStart, numberAfer){
-    var average = 0;
-    if(type == "freq"){    
-      for(var i = numberStart; i < numberAfer; i++){
-        average += inputData.freq[i]
-      }
-    }
-    else{
-      for(var i = 0; i < numberAfer; i++){
-        average += inputData.time[i]
-      }
-    }
-    return average / numberAfer;
   }
 
 }

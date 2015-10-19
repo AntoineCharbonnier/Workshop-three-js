@@ -3,10 +3,12 @@ let glslify = require('glslify');
 
 class Particles {
 
-  constructor(scene, sound) {
+  constructor(scene, sound, quality) {
 
-    this.scene = scene
-    this.sound = sound
+    this.scene   = scene
+    this.sound   = sound
+    this.quality = quality
+
 
     THREE.ImageUtils.crossOrigin = "anonymous";
     this.uniforms = {
@@ -38,8 +40,10 @@ class Particles {
       material: 0,
       extrudeMaterial: 1,
     });
-    
-    this.particles  = 4800;
+    console.log(this.quality)
+    this.particles = this.quality ? 4800 : 2400
+    // this.particles  = 4800;
+    console.log("number particles", this.particles)
     this.verticesNb = this.geom.vertices.length;
     this.vertices   = this.geom.vertices;
 

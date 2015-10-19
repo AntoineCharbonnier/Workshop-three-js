@@ -2,8 +2,8 @@ let glslify = require('glslify');
 
 class Sphere {
 
-  constructor() {
-
+  constructor( quality ) {
+    this.quality = quality
     this.vertexShader   = glslify('../../vertex-shaders/ashima.vert');
     this.fragmentShader = glslify('../../fragment-shaders/sphere-color.frag');
 
@@ -46,8 +46,12 @@ class Sphere {
     this.waveData = null;
     this.barData  = null;
 
-    this.meshGeometry = new THREE.DodecahedronGeometry( 20, 4 );
-    // this.meshGeometry = new THREE.SphereGeometry( 20, 32, 32, 0, 6.3, 0, 3.1 );
+    if(this.quality){
+      this.meshGeometry = new THREE.DodecahedronGeometry( 20, 4 );
+    }
+    else{
+      this.meshGeometry = new THREE.SphereGeometry( 20, 32, 32, 0, 6.3, 0, 3.1 );
+    }
 
     this.mesh = new THREE.Object3D()
     this.mesh.add( 
@@ -152,20 +156,6 @@ class Sphere {
 
   }
 
-  // averageData(type, inputData, numberStart, numberAfer){
-  //   var average = 0;
-  //   if(type == "freq"){    
-  //     for(var i = numberStart; i < numberAfer; i++){
-  //       average += inputData.freq[i]
-  //     }
-  //   }
-  //   else{
-  //     for(var i = 0; i < numberAfer; i++){
-  //       average += inputData.time[i]
-  //     }
-  //   }
-  //   return average / numberAfer;
-  // }
 
   setWeight( _weight ) {
     this.weight = _weight;
