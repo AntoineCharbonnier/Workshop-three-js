@@ -13,7 +13,7 @@ npm install
 
 ```shell
 gulp server
-```
+``
 
 ## TO DO 
 
@@ -31,4 +31,3 @@ Select quality : ( antialias : true/false + sphere shape + postprocessings numbe
 ### LIBRARY
   * THREE.js
   * GSAP
-

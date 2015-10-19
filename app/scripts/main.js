@@ -1,4 +1,6 @@
 import { World } from 'modules/world';
+
+//  average method with data from sound
 window.averageData = function(type, inputData, numberStart, numberAfer){
   var average = 0;
   if(type == "freq"){    
@@ -13,6 +15,7 @@ window.averageData = function(type, inputData, numberStart, numberAfer){
   }
   return average / numberAfer;
 }
+//  create world
 let world = new World();
 world.init();
 

@@ -93,7 +93,7 @@ class Sphere {
       if(data.freq[200] > 100 ){
         // mesh 1 lower & mesh 2 greater
         if(this.opacity < 1){
-          this.opacity += 0.01;
+          this.opacity += 0.1;
         }
         if(this.opacity < 0.9){
           if(data.freq[200] > 140){

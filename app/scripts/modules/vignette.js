@@ -20,16 +20,16 @@ class Vignette {
 
     this.composer.addPass( this.glitchPass );
 
-
-    this.offset = 0.55
+    
+    this.offset   = 0.55
     this.darkness = 0.55
-
-    this.delta = 0.01
+    
+    this.delta    = 0.01
     return this;
   }
 
   update( ts, data ) {
-    if( window.averageData("freq" , data, 200, 250) > 28 ){
+    if( window.averageData("freq" , data, 200, 250) > 26.5 ){
       this.glitchPass.renderToScreen = true;
     }
     else{
@@ -39,7 +39,7 @@ class Vignette {
     if( window.averageData("freq" , data, 0, 50) > 140 ){
       if( this.offset < 1 && this.darkness < 1 ){
         this.offset   += 0.05
-        this.darkness += 0.01
+        this.darkness += 0.1
       }
       this.effectVignette.uniforms[ "offset" ].value   = this.offset;
       this.effectVignette.uniforms[ "darkness" ].value = this.darkness;
@@ -48,7 +48,7 @@ class Vignette {
     if( window.averageData("freq" , data, 0, 50) > 200 ){
       if( this.offset > 0 && this.darkness > 0 ){
         this.offset   -= 0.05
-        this.darkness -= 0.01
+        this.darkness -= 0.1
       }
 
       this.effectVignette.uniforms[ "offset" ].value   = this.offset;

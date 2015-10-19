@@ -39,27 +39,60 @@
     <script src="http://antoinecharbonnier.fr/dev/three/postprocessing/optimer_typeface.js"></script>
   </head>
   <body>
-
-
     <script src="scripts/main.js"></script>
+    <!-- SVG Sprite -->
+    <div style="height: 0; width: 0; position: absolute; visibility: hidden;" aria-hidden="true">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" focusable="false">
+        <!-- Because of Firefox. -->
+        <defs>
+          <radialGradient id="gradient">
+            <stop offset="0" stop-color="#2e2e2f" />
+            <stop offset="0.25" stop-color="#4b4b4b" />
+            <stop offset="0.35" stop-color="#2e2e2f" />
+            <stop offset="0.50" stop-color="#4b4b4b" />
+            <stop offset="0.60" stop-color="#2e2e2f" />
+            <stop offset="0.85" stop-color="#4b4b4b" />
+            <stop offset="1" stop-color="#2e2e2f" />
+          </radialGradient>
+        </defs>
+        <symbol id="ripply-scott" viewBox="0 0 100 100">
+          <circle id="ripple-shape" fill="url(#gradient)" cx="1" cy="1" r="1" />
+        </symbol>
+      </svg>
+    </div>
+    <!-- /end sprite -->
 
     <div class="container">
       <!-- <div class="content"> -->
-        <h1 id="wait">Wait please</h1>
-        <h1 id="load">The sound is loaded ! Click...</h1>
-        <h1 id="reload">Reload for replay</h1>
+      <h1 id="wait">Wait please</h1>
+      <h1 id="load">The sound is loaded ! Click...</h1>
+      <h1 id="reload">Reload for replay</h1>
       <!-- </div> -->
-       <!--  <div id="choices">
-            <h1>Choose quality :</h1>
-            <div class="center-alignement">
-                <h2 id="low">LOW</h2>
-                <h2 id="high">HIGH</h2>
-            </div>
-        </div> -->
+      <div id="choices">
+        <div class="center-alignement">
+          <h1>Choose quality :</h1>
+          <div class="select-quality">
+<!--             <a href="#" id="low">Low</a>
+            <a href="#" id="high">High</a> -->
+            <button id="low" class="button styl-material">
+              Click for Ripple
+              <svg class="ripple-obj" id="js-ripple">
+                <use height="100" width="100" xlink:href="#ripply-scott" class="js-ripple"></use>
+              </svg>
+            </button>
+            <button id="high" class="button styl-material">
+              Click for Ripple
+              <svg class="ripple-obj" id="js-ripple">
+                <use height="100" width="100" xlink:href="#ripply-scott" class="js-ripple"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--
+      -->
     </div>
-
-
-
+    <script src="scripts/ripple-config.js"></script>
   </body>
 </html>
 

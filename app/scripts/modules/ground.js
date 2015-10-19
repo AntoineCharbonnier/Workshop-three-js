@@ -3,10 +3,11 @@ let PERLIN_NOISE = require('../vendors/improved_perlin_noise');
 
 class Ground {
 
-  constructor(sphere) {
+  constructor( quality ) {
 
-    this.worldWidth           = 256
-    this.worldDepth           = 256
+    this.quality = quality
+    this.worldWidth           = this.quality ? 256 : 64
+    this.worldDepth           = this.quality ? 256 : 64
     this.worldHalfWidth       = this.worldWidth / 2
     this.worldHalfDepth       = this.worldDepth / 2
     this.opacity              = 0.0;
@@ -15,14 +16,12 @@ class Ground {
 
     this.clock = new THREE.Clock();
 
-    this.ground_sphere = sphere
 
     this.vertexShader   = glslify('../../vertex-shaders/simple.vert');
     this.fragmentShader = glslify('../../fragment-shaders/cloud.frag');
 
-    /* FROM SAMSY */
     this.options = {
-      segments: 500,
+      segments: this.quality ? 500 : 250,
       wireframeColor: '#ff0000',
       wireframe: false,
       transparent: true,
@@ -58,11 +57,11 @@ class Ground {
     this.ground_mesh.position.y = 30
     this.ground_mesh.position.x = 50
 
-    this.tick   = 0;
-    this.speed  = .3;
-    this.weight = 5;
-    this.opacity = 0.0;
-    this.light = 0.0
+    this.tick              = 0;
+    this.speed             = .3;
+    this.weight            = 5;
+    this.opacity           = 0.0;
+    this.light             = 0.0
     this.ambientLuminosity = 0.0
 
     return this;
