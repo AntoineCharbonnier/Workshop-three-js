@@ -124,6 +124,7 @@ class World {
 
   addParticles(scene, sound, particles) {
     this.particles = new Particles(scene, sound, particles)
+    this.particles.drop = true
     this.scene.add( this.particles.getMesh() )
   }
 
@@ -181,6 +182,28 @@ class World {
       if(this.quality){
         this.ground.update(ts , this.tmpData);
         this.vignette.update(ts, this.tmpData)
+      }
+      console.log(this.sound.getEndEvent())
+      if( this.sound.getEndEvent() ){
+        this.params.active = false
+      
+        /* RESTART EVERYTHING */
+          let intro = new Intro()
+
+          UIComponents.init('low', 0.75);
+          UIComponents.init('high', 0.75);
+
+          var lowButton = document.getElementById('low')
+          var highButton = document.getElementById('high')
+
+          lowButton.addEventListener('click', function(){
+            intro.startExp( false )
+          } )
+
+          highButton.addEventListener('click', function(){
+            intro.startExp( true )
+          } )
+        /* END RESTART */
       }
 
     }

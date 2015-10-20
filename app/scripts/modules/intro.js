@@ -22,6 +22,7 @@ class Intro {
     this.expTitleA             = this.dom.querySelector('.about .name .A')
     
     this.expSubTitle           = this.dom.querySelector('.about h2')
+    this.expSub3Title          = this.dom.querySelector('.about h3')
     this.expHR                 = this.dom.querySelector('.about hr')
     
     this.qualityTitle          = this.dom.querySelector('.select-quality--container h1')
@@ -41,7 +42,7 @@ class Intro {
     console.log("init")
     this.timeline = new TimelineMax( { paused: true } )
 
-    TweenMax.set( [this.expTitleO, this.expTitleD, this.expTitleE, this.expTitleS, this.expTitleZ, this.expTitleA, this.expSubTitle, this.expHR, this.qualityTitle, this.qualityExplaination, this.qualityButtonLow, this.qualityButtonHigh, this.soundWait, this.soundLoaded] , {autoAlpha: 0} )
+    TweenMax.set( [this.expTitleO, this.expTitleD, this.expTitleE, this.expTitleS, this.expTitleZ, this.expTitleA, this.expSubTitle, this.expSub3Title, this.expHR, this.qualityTitle, this.qualityExplaination, this.qualityButtonLow, this.qualityButtonHigh, this.soundWait, this.soundLoaded] , {autoAlpha: 0} )
     TweenMax.set( [this.expTitleO, this.expTitleD, this.expTitleE, this.expTitleS, this.expTitleZ, this.expTitleA], { y: 30 } )
     TweenMax.set( this.dom, { scaleY: 0.01, scaleX: 0, autoAlpha: 0} )
 
@@ -73,6 +74,8 @@ class Intro {
 
     this.timeline.to( this.expHR, 0.5, { width: 100, autoAlpha: 1, ease: Back.easeOut}, time+=0.1 )
 
+    this.timeline.to( this.expSub3Title, 0.6, { autoAlpha: 1, ease: Ease.easeIn}, time+=0.1 )
+    
     this.timeline.to( [this.qualityTitle, this.qualityExplaination], 0.6, { autoAlpha: 1, ease: Ease.easeIn}, time+=0.1 )
 
     this.timeline.to( [this.qualityButtonLow, this.qualityButtonHigh], 0.6, { autoAlpha: 1, x:0, ease:   Circ.easeInOut }, time+=0.1 )
@@ -100,6 +103,7 @@ class Intro {
     this.timelineReversed.to( this.qualityButtonHigh, 0.6, { autoAlpha: 0, x:500, ease: Ease.easeOut }, time+=0.1 )
 
     this.timelineReversed.to( [this.qualityTitle, this.qualityExplaination], 0.6, { autoAlpha: 0, ease: Ease.easeIn}, time+=0.1 )
+    this.timelineReversed.to( this.expSub3Title, 0.6, { autoAlpha: 0, ease: Ease.easeIn}, time+=0.1 )
     this.timelineReversed.to( this.expHR, 0.5, { width: 0, autoAlpha: 1, ease: Back.easeOut}, time+=0.1 )
     this.timelineReversed.to( this.expSubTitle, 0.6, { autoAlpha: 0, ease: Ease.easeIn}, time+=0.1 )
     this.timelineReversed.to( this.expTitleA, 0.6, { autoAlpha: 0, y:30, ease: Ease.easeIn}, time+=0.1 )

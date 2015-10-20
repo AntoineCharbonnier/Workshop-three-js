@@ -86,14 +86,20 @@ html, body {
 					}
 
 				}
-				h2{
+				h2,h3{
 					font: normal normal 40/40px "BrandonRegular";
 					font-weight: 300;
+				}
+				h3{
+					font-size: 15px;
+					font-style : italic;
 				}
 				a{
 					font-family: Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif;		position: relative;
 					font-style : italic;
 					font-weight: 300;
+					color: #e8423f;
+					text-decoration: underline;
 				}
 				hr{
 					height: 2px;

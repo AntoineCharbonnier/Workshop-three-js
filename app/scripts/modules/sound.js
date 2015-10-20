@@ -18,6 +18,8 @@ class Sound {
 
     this._binds = {}
     this._binds.onLoad = this._onLoad.bind( this )
+
+    this.isEnded = false;
   }
 
   load( url ) {
@@ -35,6 +37,13 @@ class Sound {
       this._source.connect( this._analyser )
       this._source.buffer = buffer
       this._source.connect( this._context.destination )
+
+      console.log(this._source)
+
+      this._source.onended = function(){
+        console.log("END")
+        this.isEnded = true;
+      }.bind(this)
 
       //  explication
       var wait = document.getElementById("wait");
@@ -58,6 +67,10 @@ class Sound {
       freq: this._dataFreqArray, // from 0 - 256, no sound = 0
       time: this._dataTimeArray // from 0 -256, no sound = 128
     }
+  }
+
+  getEndEvent(){
+    return this.isEnded
   }
 
 }
