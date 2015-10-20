@@ -84,18 +84,18 @@ class Particles {
 
     this.particleSystem.name = "particleSystem"
 
-    document.addEventListener("click", 
-      function(){
-        this.drop = false;
-        console.log("click")
-        if(this.launchedSound){
-          this.launchedSound = false
-          var load = document.getElementById("load");
-          TweenLite.to(load, 0.5, {autoAlpha: 0});
-          this.sound.start()
-        }
-      }.bind(this)
-    );
+    // document.addEventListener("click", 
+    //   function(){
+    //     this.drop = false;
+    //     console.log("click")
+    //     if(this.launchedSound){
+    //       this.launchedSound = false
+    //       var load = document.getElementById("load");
+    //       TweenLite.to(load, 0.5, {autoAlpha: 0});
+    //       this.sound.start()
+    //     }
+    //   }.bind(this)
+    // );
 
     return this;
   }

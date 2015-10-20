@@ -1,5 +1,5 @@
 import { Intro } from 'modules/intro';
-import { World } from 'modules/world';
+// import { World } from 'modules/world';
 
 //  average method with data from sound
 window.averageData = function(type, inputData, numberStart, numberAfer){
@@ -31,7 +31,19 @@ document.addEventListener("DOMContentLoaded", function(e){
 
   UIComponents.init('low', 0.75);
   UIComponents.init('high', 0.75);
-      
+
+  var lowButton = document.getElementById('low')
+  var highButton = document.getElementById('high')
+
+  lowButton.addEventListener('click', function(){
+    intro.startExp( false )
+  } )
+
+  highButton.addEventListener('click', function(){
+    intro.startExp( true )
+  } )
+
+
 });
 
 

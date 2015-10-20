@@ -28,15 +28,6 @@ html, body {
 		text-align: center;
 		font-size: 25px;
 	}
-	h1#load{
-		opacity: 0;
-	}
-	h1#wait{
-		opacity: 0;
-	}
-	h1#reload{
-		opacity: 0;
-	}
 	a{
 		text-decoration: none;
 		outline: 0;
@@ -89,8 +80,9 @@ html, body {
 					font-weight: 300;
 				}
 				hr{
-					width:0; 
-					opacity:0;
+					height: 2px;
+					color: black;
+					background-color: black;
 				}
 			}
 			.select-quality--container{
@@ -118,6 +110,16 @@ html, body {
 					font-style : italic;
 					font-size: 15px;
 				}
+			}
+			.sound-statement{
+				h1{
+					font-family: Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif;		position: relative;
+					font-style : italic;
+					font-weight: 300;
+					letter-spacing: 2px;
+				}
+				// #wait{
+				// }
 			}
 		}
 	}

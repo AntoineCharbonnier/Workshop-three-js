@@ -18,9 +18,6 @@ class World {
 
   constructor( _options ) {
 
-    //  true == HIGH QUALITY
-    this.quality = false
-
     let options    = _options || {};
     
     console.log("options", options)
@@ -58,7 +55,10 @@ class World {
 
   }
 
-  init() {
+  init(quality) {
+    //  true == HIGH QUALITY
+    this.quality = quality
+    
   	this.scene = new THREE.Scene()
     // this.fog = new THREE.Fog( 0xff00ff, -0.1, 10000 )
 

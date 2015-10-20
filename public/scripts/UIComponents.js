@@ -1,4 +1,5 @@
 /* FROM tympanus.net */
+
 var UIComponents = (function() {
   function UIComponentsAnimation(target, event, timing) {
     var tl           = new TimelineMax();
@@ -37,7 +38,6 @@ var UIComponents = (function() {
         UIComponentsAnimation.call(this, target, event, timing);
         // HERE ADD THE NEXT : BIND TO LAUNCH EVENT WITH QUALITY 
         // BEFORE ON SOUND.JS & PARTICLES.JS
-        
       });
     }
   };
