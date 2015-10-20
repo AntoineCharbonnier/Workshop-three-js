@@ -40,9 +40,9 @@ class Particles {
       material: 0,
       extrudeMaterial: 1,
     });
-    console.log(this.quality)
+
     this.particles = this.quality ? 4800 : 2400
-    // this.particles  = 4800;
+
     console.log("number particles", this.particles)
     this.verticesNb = this.geom.vertices.length;
     this.vertices   = this.geom.vertices;
@@ -69,12 +69,9 @@ class Particles {
     this.geometry2.addAttribute( 'customColor', new THREE.BufferAttribute( this.colors, 3 ) );
     this.geometry2.addAttribute( 'size', new THREE.BufferAttribute( this.sizes, 1 ) );
 
-
     this.particleSystem = new THREE.Points(this.geometry2, this.shaderMaterial2);
     this.particleSystem.position.z = -70
     this.particleSystem.position.x = -30
-
-    // console.log("ppt", this.particleSystem)
     
     this.clock   = Date.now()
     this.drop    = true
