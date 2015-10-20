@@ -9,6 +9,7 @@ import { Sepia } from './sepia';
 import { Vignette } from './vignette';
 import { Particles } from './particles';
 import { Sound } from './sound';
+import { Intro } from 'modules/intro';
 
 let PERLIN_NOISE = require('../vendors/improved_perlin_noise');
 
@@ -183,7 +184,7 @@ class World {
         this.ground.update(ts , this.tmpData);
         this.vignette.update(ts, this.tmpData)
       }
-      console.log(this.sound.getEndEvent())
+      // console.log(this.sound.getEndEvent())
       if( this.sound.getEndEvent() ){
         this.params.active = false
       

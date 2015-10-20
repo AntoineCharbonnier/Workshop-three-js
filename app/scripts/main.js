@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 
 
-// console.log = function(){}
-// console.warn = function(){}
+console.log = function(){}
+console.warn = function(){}
 
 
