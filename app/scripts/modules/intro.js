@@ -41,11 +41,6 @@ class Intro {
     console.log("init")
     this.timeline = new TimelineMax( { paused: true } )
 
-
-    // TweenMax.set( [this.logoATopPath, this.logoOutSideBorderPath, this.logoOutSideCPath, this.logoInSideCPath, this.logoABarPath], {drawSVG: "50% 50%"} )
-
-
-
     TweenMax.set( [this.expTitleO, this.expTitleD, this.expTitleE, this.expTitleS, this.expTitleZ, this.expTitleA, this.expSubTitle, this.expHR, this.qualityTitle, this.qualityExplaination, this.qualityButtonLow, this.qualityButtonHigh, this.soundWait, this.soundLoaded] , {autoAlpha: 0} )
     TweenMax.set( [this.expTitleO, this.expTitleD, this.expTitleE, this.expTitleS, this.expTitleZ, this.expTitleA], { y: 30 } )
     TweenMax.set( this.dom, { scaleY: 0.01, scaleX: 0, autoAlpha: 0} )
@@ -63,9 +58,6 @@ class Intro {
   show(){
     console.log("show")
     var time = 0
-
-
-    // this.timeline.to([this.logoATopPath, this.logoOutSideBorderPath, this.logoOutSideCPath, this.logoInSideCPath, this.logoABarPath], 0.4, {  drawSVG: "100% 100%" , ease: Ease.easeIn}, time+= 0.4)
 
     this.timeline.to(this.dom, 0.4, {  scaleX: 1, autoAlpha: 1 , ease: Ease.easeIn}, time+= 0.4)
     this.timeline.to(this.dom, 0.3, {  scaleY: 1, ease: Ease.easeIn}, time+= 0.9)

@@ -1,5 +1,4 @@
 import { Intro } from 'modules/intro';
-// import { World } from 'modules/world';
 
 //  average method with data from sound
 window.averageData = function(type, inputData, numberStart, numberAfer){
@@ -18,16 +17,9 @@ window.averageData = function(type, inputData, numberStart, numberAfer){
 }
 
 
-
-let intro = new Intro()
-
 // DOM LOADED
 document.addEventListener("DOMContentLoaded", function(e){
-
-  //  create world
-  // let world = new World();
-  // world.init();
-
+  let intro = new Intro()
 
   UIComponents.init('low', 0.75);
   UIComponents.init('high', 0.75);

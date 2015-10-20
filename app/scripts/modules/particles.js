@@ -1,4 +1,3 @@
-// let THREE = require('../vendors/three.min');
 let glslify = require('glslify');
 
 class Particles {
@@ -135,9 +134,3 @@ class Particles {
 }
 
 export { Particles };
-
-
-
-
-
-

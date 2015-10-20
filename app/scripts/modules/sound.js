@@ -43,7 +43,7 @@ class Sound {
       TweenLite.to(load, 0.5, {autoAlpha: 1});
       console.log("ok")
     }, () => {
-      console.log( "error" )
+      console.warn( "ERROR" )
     } )
   }
 

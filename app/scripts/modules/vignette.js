@@ -20,7 +20,6 @@ class Vignette {
 
     this.composer.addPass( this.glitchPass );
 
-    
     this.offset   = 0.55
     this.darkness = 0.55
     
