@@ -1,18 +1,18 @@
-import { Keyboard } from './keyboard';
-import { Sphere } from './sphere';
-import { Terrain } from './terrain';
-import { Ground } from './ground';
-import { Circle } from './circle';
-import { Glitch } from './glitch';
+import { Keyboard }  from './keyboard';
+import { Sphere }    from './sphere';
+import { Terrain }   from './terrain';
+import { Ground }    from './ground';
+import { Circle }    from './circle';
+import { Glitch }    from './glitch';
 import { DotScreen } from './dotscreen';
-import { Sepia } from './sepia';
-import { Vignette } from './vignette';
+import { Sepia }     from './sepia';
+import { Vignette }  from './vignette';
 import { Particles } from './particles';
-import { Sound } from './sound';
-import { Intro } from 'modules/intro';
-import { Outro } from 'modules/outro';
+import { Sound }     from './sound';
+import { Intro }     from 'modules/intro';
+import { Outro }     from 'modules/outro';
 
-let PERLIN_NOISE = require('../vendors/improved_perlin_noise');
+// let PERLIN_NOISE = require('../vendors/improved_perlin_noise');
 
 // let OrbitControls = require('three-orbit-controls')(THREE);
 
@@ -21,20 +21,16 @@ class World {
   constructor( _options ) {
 
     let options    = _options || {};
-    
-    console.log("options", options)
 
-    this.scene     = null;
-    this.camera    = null;
-    this.renderer  = null;
-    this.composer  = null;
-    this.keyboard  = null;
+    this.scene    = null;
+    this.camera   = null;
+    this.renderer = null;
+    this.composer = null;
+    this.keyboard = null;
+    this.controls = null;
+    this.sphere   = null;
+    this.ground   = null;
     this.container = options.container || document.body;
-    this.controls  = null;
-    // this.sound = null;
-
-    this.sphere = null;
-    this.ground = null;
 
   	this.params = {
           active: options.active || true,
@@ -50,25 +46,20 @@ class World {
     this.clock = null;
 
     this.sound = new Sound();
-    // this.sound.load( "mp3/InDaClub-50Cent.mp3" )
+    this.sound.load( "mp3/InDaClub-50Cent.mp3" )
     // this.sound.load( "mp3/odesza-say-my-name.mp3" )
-    this.sound.load( "mp3/ambiant-dark.mp3" )
-
-    console.log("sound : ",this.sound)
+    // this.sound.load( "mp3/ambiant-dark.mp3" )
 
     this.tmpData = this.sound.getData();
-
   }
 
   init(quality) {
     //  true == HIGH QUALITY
     this.quality = quality
     
-  	this.scene = new THREE.Scene()
-    // this.fog = new THREE.Fog( 0xff00ff, -0.1, 10000 )
+  	this.scene  = new THREE.Scene()
 
-    // this.scene.fog = this.fog
-  	this.camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 100000 )
+    this.camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 100000 )
   	this.camera.position.z = 0
     this.scene.add( this.camera )
     this.addLights()
@@ -85,14 +76,14 @@ class World {
 
     this.addSphere( this.quality )
     this.addParticles( this.scene, this.sound, this.quality )
-    // this.particles.launchSound()
+
     this.addTerrain( this.quality )
-    // this.addGlitch( this.renderer, this.scene, this.camera )
-    // this.addDotScreen( this.renderer, this.scene, this.camera )
-    // this.addSepia( this.renderer, this.scene, this.camera )
+
     if(this.quality){
       this.addGround( this.quality )
       this.addVignette( this.renderer, this.scene, this.camera )
+      this.fog = new THREE.FogExp2(0x000000, 0.055)
+      this.scene.fog = this.fog
     }
 
     this.addListeners()
@@ -129,8 +120,10 @@ class World {
 
   addParticles(scene, sound, particles) {
     this.particles = new Particles(scene, sound, particles)
-    this.particles.drop = true
     this.scene.add( this.particles.getMesh() )
+    setTimeout(()=>
+      this.particles.drop = false
+    , 1000)
   }
 
   addTerrain( quality ) {
@@ -175,7 +168,6 @@ class World {
       this.sphere.update(ts , this.tmpData);
       this.terrain.update(ts , this.tmpData);
 
-
       if(this.particles.opacity < 0.3){
         this.scene.remove( this.particles.particleSystem )
         this.scene.remove( this.particles )
@@ -188,39 +180,14 @@ class World {
         this.ground.update(ts , this.tmpData);
         this.vignette.update(ts, this.tmpData)
       }
-      // console.log(this.sound.getEndEvent())
+
       if( this.sound.getEndEvent() ){
         this.params.active = false
-        console.log("try disconnect")
         this.sound.disconnect(this.sound._analyser)
-        // this.particles.disconnectSound()
-        // this.reset()
-
-
         /*  OUTRO  */
         let outro = new Outro()
         /*  END OUTRO  */
-
-        // /* RESTART EVERYTHING */
-        //   let intro = new Intro()
-
-        //   UIComponents.init('low', 0.75);
-        //   UIComponents.init('high', 0.75);
-
-        //   var lowButton = document.getElementById('low')
-        //   var highButton = document.getElementById('high')
-
-        //   lowButton.addEventListener('click', function(){
-        //     intro.startExp( false )
-        //   } )
-
-        //   highButton.addEventListener('click', function(){
-        //     intro.startExp( true )
-        //     // document.location.reload()
-        //   } )
-        // /* END RESTART */
       }
-
     }
   }
 
@@ -231,13 +198,11 @@ class World {
     this.composer  = null;
     this.keyboard  = null;
     this.clock     = null;
-    // this.sound     = null;
     this.sphere    = null;
     this.ground    = null;
     this.particles = null;
     this.terrain   = null;
   }
-
 
   render() {
   	if (!this.params.active)
@@ -257,7 +222,7 @@ class World {
   }
 
   onWindowResize() {
-  	this.params.width = window.innerWidth;
+    this.params.width  = window.innerWidth;
     this.params.height = window.innerHeight;
 
     this.camera.aspect = this.params.width / this.params.height;

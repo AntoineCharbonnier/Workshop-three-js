@@ -98,7 +98,6 @@ class Particles {
 
   update() {
     var time = Date.now() * 0.01;
-
     if(this.drop){
       var sizes = this.geometry2.attributes.size.array;
       for ( var i = 0; i < this.particles; i++ ) {

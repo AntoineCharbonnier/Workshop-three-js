@@ -151,3 +151,102 @@ html, body {
 		}
 	}
 }
+
+
+@include mobile(){
+
+	.container{
+		#choices{
+			top: 25px;
+			left: 25px;
+			width: calc(100vw - 50px);
+			height: calc(100vh - 50px);
+
+			.center-alignement{
+				top: 0;
+				left: 0;
+				.logo{
+					width: 120px;
+					height: 50px;
+					margin: 0 auto 0px auto;
+				}
+				.about{
+					.name{
+						height: 50px;
+						h1{
+					    top: 0px;
+					    margin: 0;
+							font: normal normal 40px/40px "BrandonRegular";
+							display: inline-block;
+						}
+
+					}
+					h2,h3{
+						font: normal normal 40/40px "BrandonRegular";
+						font-weight: 300;
+						margin: 0;
+					}
+					h3{
+						font-size: 15px;
+						font-style : italic;
+					}
+					a{
+						font-family: Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif;		position: relative;
+						font-style : italic;
+						font-weight: 300;
+						color: #e8423f;
+						text-decoration: underline;
+					}
+					hr{
+						height: 2px;
+						color: black;
+						background-color: black;
+					}
+				}
+				.select-quality--container{
+					position: relative;
+					margin: 0 auto;
+					text-align: center;
+					h1{
+						font-size: 15px;
+						margin: 0;
+					}
+					a{
+						position: relative;
+						display: inline-block;
+						cursor: pointer;
+						height: 30px;
+						width: 120px;
+						font-family: Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif;		position: relative;
+						font-style : italic;
+						border: 1px solid black;
+					}
+					button{
+						cursor: pointer;
+						font-style : italic;
+						font-weight: 300;
+						letter-spacing: 2px;
+						font-family: Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif;		position: relative;
+					}
+					h3{
+						font-style : italic;
+						font-size: 15px;
+						margin: 0;
+					}
+				}
+				.sound-statement{
+					h1{
+						margin: 0;
+						font-size: 15px;
+					}
+				}
+			}
+		}
+	}
+
+}
+
+
+
+
+
