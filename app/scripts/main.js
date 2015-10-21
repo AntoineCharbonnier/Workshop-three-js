@@ -1,4 +1,5 @@
 import { Intro } from 'modules/intro';
+import { Video } from 'modules/video';
 
 //  average method with data from sound
 window.averageData = function(type, inputData, numberStart, numberAfer){
@@ -21,13 +22,20 @@ window.averageData = function(type, inputData, numberStart, numberAfer){
 document.addEventListener("DOMContentLoaded", function(e){
   let intro = new Intro()
 
+  
+  var lowButton    = document.getElementById('low')
+  var videoButton  = document.getElementById('video')
+  var highButton   = document.getElementById('high')
+  var reloadButton = document.getElementById('reload')
+
   UIComponents.init('low', 0.75);
+  UIComponents.init('video', 0.75);
   UIComponents.init('high', 0.75);
   UIComponents.init('reload', 0.75);
 
-  var lowButton    = document.getElementById('low')
-  var highButton   = document.getElementById('high')
-  var reloadButton = document.getElementById('reload')
+
+  var myVideoPlayer = new Video("video-player")
+
 
   lowButton.addEventListener('click', function(){
     intro.startExp( false )
@@ -42,20 +50,11 @@ document.addEventListener("DOMContentLoaded", function(e){
       document.location.reload()
     }, 1000)
   } )
-  // lowButton.addEventListener('touchstart', function(){
-  //   intro.startExp( false )
-  // } )
 
-  // highButton.addEventListener('touchstart', function(){
-  //   intro.startExp( true )
-  // } )
-
-  // reloadButton.addEventListener('touchstart', function(){
-  //   setTimeout(function(){
-  //     document.location.reload()
-  //   }, 1000)
-  // } )
-
+  videoButton.addEventListener('click', function(){
+    myVideoPlayer.play()
+  } )
+  
 });
 
 

@@ -123,7 +123,7 @@
             <h3>Music : Say my name - Odesza</h3>
             <hr>
           </div>
-          <div class="select-quality--container">          
+          <div class="select-quality--container desktop">          
             <h1 class="exp-quality">Choose experiment quality :</h1>
             <h3>Depending on your GPU skills</h3>
             <h1 class="play-again-text hide">Want to play again ?</h1>
@@ -145,15 +145,30 @@
                 <svg class="ripple-obj" id="js-ripple">
                   <use height="100" width="100" xlink:href="#ripply-scott3" class="reload"></use>
                 </svg>
-              </button>
+              </button> 
             </div>
           </div>
-          <div class="sound-statement">
+          <div class="sound-statement desktop">
             <h1 id="wait">Wait please</h1>
             <h1 id="load">The sound is loaded ! Click...</h1>
           </div>
+          <div class="mobile fallback">
+              <button id="video" class="button styl-material">
+                Play the experiment's video
+                <svg class="ripple-obj" id="js-ripple">
+                  <use height="100" width="100" xlink:href="#ripply-scott" class="video"></use>
+                </svg>
+              </button>
+          </div>
         </div>
       </div>
+      <video id="video-player" class="">
+        <source src="videos/video.mp4" type="video/mp4" />
+        <!-- <source src="videos/video.webm" type="video/webm" /> -->
+        <!-- <source src="videos/video.ogv" type="video/ogv" /> -->
+        Votre navigateur ne vous permet pas de visionner la vidéo,
+        Utilisez Google Chrome ou Firefox
+      </video>
     </div>
     <script src="scripts/UIComponents.js"></script>
     <script src="scripts/main.js"></script>

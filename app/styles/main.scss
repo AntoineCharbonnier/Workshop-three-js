@@ -19,6 +19,14 @@ html, body {
 	display: none !important;
 }
 
+.desktop{
+	display: block;
+}
+
+.mobile{
+	display: none !important;
+}
+
 .container{
 	position: absolute;
 	display: table;
@@ -155,6 +163,14 @@ html, body {
 
 @include mobile(){
 
+	.desktop{
+		display: none !important;
+	}
+
+	.mobile{
+		display: block !important;
+	}
+
 	.container{
 		#choices{
 			top: 25px;
@@ -203,7 +219,7 @@ html, body {
 						background-color: black;
 					}
 				}
-				.select-quality--container{
+				.select-quality--container, .fallback{
 					position: relative;
 					margin: 0 auto;
 					text-align: center;
