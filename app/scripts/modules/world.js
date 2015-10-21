@@ -45,9 +45,11 @@ class World {
 
     this.clock = null;
 
+
+
     this.sound = new Sound();
-    this.sound.load( "mp3/InDaClub-50Cent.mp3" )
-    // this.sound.load( "mp3/odesza-say-my-name.mp3" )
+    // this.sound.load( "mp3/InDaClub-50Cent.mp3" )
+    this.sound.load( "mp3/odesza-say-my-name.mp3" )
     // this.sound.load( "mp3/ambiant-dark.mp3" )
 
     this.tmpData = this.sound.getData();

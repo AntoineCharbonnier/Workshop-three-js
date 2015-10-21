@@ -42,7 +42,19 @@ document.addEventListener("DOMContentLoaded", function(e){
       document.location.reload()
     }, 1000)
   } )
+  // lowButton.addEventListener('touchstart', function(){
+  //   intro.startExp( false )
+  // } )
 
+  // highButton.addEventListener('touchstart', function(){
+  //   intro.startExp( true )
+  // } )
+
+  // reloadButton.addEventListener('touchstart', function(){
+  //   setTimeout(function(){
+  //     document.location.reload()
+  //   }, 1000)
+  // } )
 
 });
 

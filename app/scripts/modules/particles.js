@@ -40,7 +40,8 @@ class Particles {
       extrudeMaterial: 1,
     });
 
-    this.particles = this.quality ? 4800 : 2400
+    // this.particles = this.quality ? 4800 : 2400
+    this.particles = this.quality ? 4800 : 0
 
     console.log("number particles", this.particles)
     this.verticesNb = this.geom.vertices.length;

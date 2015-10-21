@@ -17,8 +17,8 @@ gulp server
 
 ## TO DO 
 
-Select quality : ( antialias : true/false + sphere shape + postprocessings numbers)
-
+~~Select quality : ( antialias : true/false + sphere shape + postprocessings numbers)~~
+Screencast and mobile fallback
 
 
 ### FRONT-END LANGUAGES

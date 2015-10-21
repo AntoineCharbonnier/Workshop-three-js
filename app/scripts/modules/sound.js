@@ -4,6 +4,9 @@
 class Sound {
 
   constructor() {
+    // Fix up for prefixing
+    window.AudioContext = window.AudioContext||window.webkitAudioContext;
+    
     this._context = new AudioContext()
 
     this._bufferSize = 1024 // change this value for more or less data
