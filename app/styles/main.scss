@@ -3,13 +3,20 @@
 @import "fonts";
 @import "components";
 
+
+
 html, body {
+  -webkit-font-smoothing: antialiased;
 	width: 100%;
 	height: 100%;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
 	background: black;
+}
+
+.hide{
+	display: none !important;
 }
 
 .container{

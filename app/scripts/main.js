@@ -23,9 +23,11 @@ document.addEventListener("DOMContentLoaded", function(e){
 
   UIComponents.init('low', 0.75);
   UIComponents.init('high', 0.75);
+  UIComponents.init('reload', 0.75);
 
-  var lowButton = document.getElementById('low')
-  var highButton = document.getElementById('high')
+  var lowButton    = document.getElementById('low')
+  var highButton   = document.getElementById('high')
+  var reloadButton = document.getElementById('reload')
 
   lowButton.addEventListener('click', function(){
     intro.startExp( false )
@@ -35,12 +37,18 @@ document.addEventListener("DOMContentLoaded", function(e){
     intro.startExp( true )
   } )
 
+  reloadButton.addEventListener('click', function(){
+    setTimeout(function(){
+      document.location.reload()
+    }, 1000)
+  } )
+
 
 });
 
 
 
-console.log = function(){}
-console.warn = function(){}
+// console.log = function(){}
+// console.warn = function(){}
 
 

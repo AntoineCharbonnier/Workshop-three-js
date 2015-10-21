@@ -131,6 +131,10 @@ class Particles {
     this.sound.start()
   }
 
+  // disconnectSound(){
+  //   this.sound.disconnect()
+  // }
+
 }
 
 export { Particles };

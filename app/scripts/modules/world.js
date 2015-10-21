@@ -10,6 +10,7 @@ import { Vignette } from './vignette';
 import { Particles } from './particles';
 import { Sound } from './sound';
 import { Intro } from 'modules/intro';
+import { Outro } from 'modules/outro';
 
 let PERLIN_NOISE = require('../vendors/improved_perlin_noise');
 
@@ -50,7 +51,10 @@ class World {
 
     this.sound = new Sound();
     // this.sound.load( "mp3/InDaClub-50Cent.mp3" )
-    this.sound.load( "mp3/odesza-say-my-name.mp3" )
+    // this.sound.load( "mp3/odesza-say-my-name.mp3" )
+    this.sound.load( "mp3/ambiant-dark.mp3" )
+
+    console.log("sound : ",this.sound)
 
     this.tmpData = this.sound.getData();
 
@@ -187,28 +191,53 @@ class World {
       // console.log(this.sound.getEndEvent())
       if( this.sound.getEndEvent() ){
         this.params.active = false
-      
-        /* RESTART EVERYTHING */
-          let intro = new Intro()
+        console.log("try disconnect")
+        this.sound.disconnect(this.sound._analyser)
+        // this.particles.disconnectSound()
+        // this.reset()
 
-          UIComponents.init('low', 0.75);
-          UIComponents.init('high', 0.75);
 
-          var lowButton = document.getElementById('low')
-          var highButton = document.getElementById('high')
+        /*  OUTRO  */
+        let outro = new Outro()
+        /*  END OUTRO  */
 
-          lowButton.addEventListener('click', function(){
-            intro.startExp( false )
-          } )
+        // /* RESTART EVERYTHING */
+        //   let intro = new Intro()
 
-          highButton.addEventListener('click', function(){
-            intro.startExp( true )
-          } )
-        /* END RESTART */
+        //   UIComponents.init('low', 0.75);
+        //   UIComponents.init('high', 0.75);
+
+        //   var lowButton = document.getElementById('low')
+        //   var highButton = document.getElementById('high')
+
+        //   lowButton.addEventListener('click', function(){
+        //     intro.startExp( false )
+        //   } )
+
+        //   highButton.addEventListener('click', function(){
+        //     intro.startExp( true )
+        //     // document.location.reload()
+        //   } )
+        // /* END RESTART */
       }
 
     }
   }
+
+  reset(){
+    this.scene     = null;
+    this.camera    = null;
+    this.renderer  = null;
+    this.composer  = null;
+    this.keyboard  = null;
+    this.clock     = null;
+    // this.sound     = null;
+    this.sphere    = null;
+    this.ground    = null;
+    this.particles = null;
+    this.terrain   = null;
+  }
+
 
   render() {
   	if (!this.params.active)
