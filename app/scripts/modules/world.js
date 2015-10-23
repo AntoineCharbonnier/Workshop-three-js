@@ -20,9 +20,11 @@ class World {
 
   constructor( _options ) {
 
-    this.controlsWorld = false
+    this.controlsWorld = true
+
     if(this.controlsWorld){
       this.orbitControls = require('orbit-controls')()
+      console.log("orbit",this.orbitControls)
     }
 
     let options    = _options || {};
@@ -53,9 +55,11 @@ class World {
 
 
     this.sound = new Sound();
-    // this.sound.load( "mp3/InDaClub-50Cent.mp3" )
     this.sound.load( "mp3/odesza-say-my-name.mp3" )
-    // this.sound.load( "mp3/ambiant-dark.mp3" )
+    // this.sound.load( "mp3/sound-exp/InDaClub-50Cent.mp3" )
+    // this.sound.load( "mp3/sound-exp/all-my-love.mp3" )
+    // this.sound.load( "mp3/sound-exp/light-it-up.mp3" )
+    // this.sound.load( "mp3/sound-exp/ambiant-dark.mp3" )
 
     this.tmpData = this.sound.getData();
   }
@@ -66,8 +70,11 @@ class World {
 
 
     // this.target = new THREE.Vector3(0,0,0)
-    this.target = new THREE.Vector3(0,0,0)
-    
+    // this.target = new THREE.Vector3(0,30,0)
+    this.target = new THREE.Vector3(0.08109186424098777, -0.05447687655938174,  7.599372104290837)
+
+
+
   	this.scene  = new THREE.Scene()
 
     this.camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 100000 )
@@ -224,6 +231,7 @@ class World {
     this.orbitControls.update(position, direction)
     this.camera.position.fromArray(position)
     this.camera.lookAt(this.target.fromArray(direction))
+
   }
 
   render() {
