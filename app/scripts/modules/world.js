@@ -20,6 +20,11 @@ class World {
 
   constructor( _options ) {
 
+    this.controlsWorld = false
+    if(this.controlsWorld){
+      this.orbitControls = require('orbit-controls')()
+    }
+
     let options    = _options || {};
 
     this.scene    = null;
@@ -32,13 +37,13 @@ class World {
     this.ground   = null;
     this.container = options.container || document.body;
 
-  	this.params = {
+    this.params = {
           active: options.active || true,
           height: options.height || window.innerHeight,
           width:  options.width  || window.innerWidth
-  	};
+    };
 
-  	this.mouse = {
+    this.mouse = {
         x: null,
         y: null
     };
@@ -58,17 +63,23 @@ class World {
   init(quality) {
     //  true == HIGH QUALITY
     this.quality = quality
+
+
+    // this.target = new THREE.Vector3(0,0,0)
+    this.target = new THREE.Vector3(0,0,0)
     
   	this.scene  = new THREE.Scene()
 
     this.camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 100000 )
   	this.camera.position.z = 0
+
     this.scene.add( this.camera )
     this.addLights()
 
     this.renderer = new THREE.WebGLRenderer({
         antialias: this.quality
     });
+
 
   	this.renderer.setSize( this.params.width, this.params.height )
 
@@ -206,10 +217,22 @@ class World {
     this.terrain   = null;
   }
 
+
+  updateControls(){    
+    var position = this.camera.position.toArray()
+    var direction = this.target.toArray()
+    this.orbitControls.update(position, direction)
+    this.camera.position.fromArray(position)
+    this.camera.lookAt(this.target.fromArray(direction))
+  }
+
   render() {
-  	if (!this.params.active)
-      	this.params.active = true;
-      this.renderer.render( this.scene, this.camera );	
+    if (!this.params.active)
+        this.params.active = true;
+      this.renderer.render( this.scene, this.camera );
+    if(this.controlsWorld){
+      this.updateControls()
+    }
   }
 
   addListeners() {
