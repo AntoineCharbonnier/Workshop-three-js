@@ -20,12 +20,12 @@ class World {
 
   constructor( _options ) {
 
-    this.controlsWorld = true
+    // this.controlsWorld = true
 
-    if(this.controlsWorld){
-      this.orbitControls = require('orbit-controls')()
-      console.log("orbit",this.orbitControls)
-    }
+    // if(this.controlsWorld){
+    //   this.orbitControls = require('orbit-controls')()
+    //   console.log("orbit",this.orbitControls)
+    // }
 
     let options    = _options || {};
 
@@ -71,7 +71,7 @@ class World {
 
     // this.target = new THREE.Vector3(0,0,0)
     // this.target = new THREE.Vector3(0,30,0)
-    this.target = new THREE.Vector3(0.08109186424098777, -0.05447687655938174,  7.599372104290837)
+    // this.target = new THREE.Vector3(0.08109186424098777, -0.05447687655938174,  7.599372104290837)
 
 
 
@@ -238,9 +238,9 @@ class World {
     if (!this.params.active)
         this.params.active = true;
       this.renderer.render( this.scene, this.camera );
-    if(this.controlsWorld){
-      this.updateControls()
-    }
+    // if(this.controlsWorld){
+      // this.updateControls()
+    // }
   }
 
   addListeners() {
